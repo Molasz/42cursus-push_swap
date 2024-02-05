@@ -1,0 +1,8 @@
+main.c
+libft.a
+.DS_Store
+*.swp
+*.out
+*.o
+*.d
+do_bonus
