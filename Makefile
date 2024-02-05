@@ -6,13 +6,17 @@
 #    By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 19:46:01 by molasz            #+#    #+#              #
-#    Updated: 2024/02/05 20:02:49 by molasz           ###   ########.fr        #
+#    Updated: 2024/02/06 00:14:42 by molasz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= ft_push_swap.c
+SRCS	= push_swap.c \
+			swap.c \
+			push.c \
+			rotate.c \
+			reverse.c 
 
-HEAD	= ft_push_swap.h
+HEAD	= push_swap.h
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -35,17 +39,15 @@ all:		${NAME}
 %.o:		%.c
 				${CC} ${CFLAGS} -c $< -MMD
 
-lib:
-				make -C ${LIB}
-				cp ${LIB}/${LIB}.a ${NAME}
-
 ${NAME}:	lib ${OBJS} ${HEAD} Makefile
-				${AR} ${NAME} ${OBJS}
+				make -C ${LIB}
+				${CC} ${CFLAGS} ${OBJS} ${LIB}/${LIB}.a -o ${NAME}
 
 clean:
 				${RM} ${OBJS} ${DEPS}
 
 fclean:		clean
+				make fclean -C ${LIB}
 				${RM} ${NAME}
 
 re:			fclean all
