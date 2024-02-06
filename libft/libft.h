@@ -6,13 +6,14 @@
 /*   By: molasz-a <molasz-a@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 02:16:09 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/01/10 00:40:25 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:39:00 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "get_next_line.h"
 # include <unistd.h> 
 # include <stdlib.h>
 

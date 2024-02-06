@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:39:30 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/01/30 20:07:54 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:49:58 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	read_buffer(t_file *file)
 		if (read_len < BUFFER_SIZE)
 			file->end = 1;
 		str[read_len] = '\0';
-		str = ft_strjoin(file->buff, str);
+		str = ft_nextjoin(file->buff, str);
 		if (!str)
 			return (1);
 		file->buff = str;
@@ -64,10 +64,10 @@ static int	calc_buff(t_file *file, char *line)
 	int		i;
 
 	res = NULL;
-	line_len = ft_strlen(line);
+	line_len = ft_nextlen(line);
 	if (line_len)
 	{
-		res = malloc(ft_strlen(file->buff) - line_len + 1);
+		res = malloc(ft_nextlen(file->buff) - line_len + 1);
 		if (!res)
 			return (1);
 		i = 0;

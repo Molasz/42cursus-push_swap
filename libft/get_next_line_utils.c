@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:40:24 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/01/30 20:08:59 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:53:56 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_file	*get_file(t_file *files, int fd)
 	return (file);
 }
 
-size_t	ft_strlen(char *s)
+size_t	ft_nextlen(char *s)
 {
 	size_t	i;
 
@@ -40,13 +40,13 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_nextjoin(char *s1, char *s2)
 {
 	char	*res;
 	int		i;
 	int		j;
 
-	res = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
+	res = malloc((ft_nextlen(s1) + ft_nextlen(s2) + 1));
 	if (!res)
 	{
 		free(s2);
