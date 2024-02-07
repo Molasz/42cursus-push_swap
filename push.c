@@ -14,21 +14,41 @@
 
 static void	push(t_list **dst, t_list **src)
 {
-	if (ft_lstsize(*src))
+	t_list	*tmp;
+
+	if (*src)
 	{
-		ft_lstadd_front(dst, *src);
-		*src = (*src)->next;
+		(*src)->next->prev = (*src)->prev;
+		(*src)->prev->next = (*src)->next;
+		if (*dst)
+		{
+			tmp = (*dst)->prev;
+			(*dst)->prev->next = *src;
+			(*dst)->prev = *src;
+			(*src)->next = *dst;
+			(*src)->prev = tmp;
+		}
+		else
+		{
+			(*src)->next = *src;
+			(*src)->prev = *src;
+		}
+		*dst = *src;
+		if ((*src)->next == *src)
+			*src = NULL;
+		else
+			*src = (*src)->next;
 	}
 }
 
 void	push_a(t_list **dst, t_list **src)
 {
 	push(dst, src);
-	write(1, "pa", 2);
+	write(1, "pa\n", 3);
 }
 
 void	push_b(t_list **dst, t_list **src)
 {
 	push(dst, src);
-	write(1, "pb", 2);
+	write(1, "pb\n", 3);
 }

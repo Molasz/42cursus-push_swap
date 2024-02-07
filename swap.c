@@ -16,7 +16,7 @@ static void	swap(t_list *stk)
 {
 	int	*n;
 
-	if (ft_lstsize(stk) > 1)
+	if (stk)
 	{
 		n = stk->next->content;
 		stk->next->content = stk->content;
@@ -27,13 +27,13 @@ static void	swap(t_list *stk)
 void	swap_a(t_list *stk)
 {
 	swap(stk);
-	write(1, "sa", 2);
+	write(1, "sa\n", 3);
 }
 
 void	swap_b(t_list *stk)
 {
 	swap(stk);
-	write(1, "sb", 2);
+	write(1, "sb\n", 3);
 }
 
 
@@ -41,5 +41,5 @@ void	swap_ab(t_list *stk_a, t_list *stk_b)
 {
 	swap(stk_a);
 	swap(stk_b);
-	write(1, "ss", 2);
+	write(1, "ss\n", 3);
 }

@@ -12,43 +12,25 @@
 
 #include "push_swap.h"
 
-static void    reverse_r(t_list **lst, t_list *stk)
-{
-        if (stk && stk->next)
-        {
-                reverse_r(lst, stk->next);
-                ft_lstadd_front(lst, stk);
-        }
-}
-
 static void	reverse(t_list **stk)
 {
-	t_list	*lst;
-	t_list	*tmp;
-
-	if (ft_lstsize(*stk))
-	{
-		reverse_r(&lst, *stk);
-		tmp = ft_lstlast(*stk);
-		ft_lstadd_front(&lst, tmp);
-
-	}
+	*stk = (*stk)->prev;
 }
 void	reverse_a(t_list **stk)
 {
 	reverse(stk);
-	write(1, "rra", 3);
+	write(1, "rra\n", 4);
 }
 
 void	reverse_b(t_list **stk)
 {
 	reverse(stk);
-	write(1, "rrb", 3);
+	write(1, "rrb\n", 4);
 }
 
 void	reverse_ab(t_list **stk_a, t_list **stk_b)
 {
 	reverse(stk_a);
 	reverse(stk_b);
-	write(1, "rrr", 3);
+	write(1, "rrr\n", 4);
 }

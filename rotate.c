@@ -12,42 +12,26 @@
 
 #include "push_swap.h"
 
-static void	rotate_r(t_list **lst, t_list *stk)
-{
-	if (stk)
-	{
-		rotate_r(lst, stk->next);
-		ft_lstadd_front(lst, stk);
-	}
-}
-
 static void	rotate(t_list **stk)
 {
-	t_list	 *lst;
-
-	if (ft_lstsize(*stk))
-	{
-		ft_lstadd_front(&lst, *stk);
-		rotate_r(&lst, (*stk)->next);
-		*stk = lst;
-	}
+	*stk = (*stk)->next;
 }
 
 void	rotate_a(t_list **stk)
 {
 	rotate(stk);
-	write(1, "ra", 2);
+	write(1, "ra\n", 3);
 }
 
 void	rotate_b(t_list **stk)
 {
 	rotate(stk);
-	write(1, "rb", 2);
+	write(1, "rb\n", 3);
 }
 
 void	rotate_ab(t_list **stk_a, t_list **stk_b)
 {
 	rotate(stk_a);
 	rotate(stk_b);
-	write(1, "rr", 2);
+	write(1, "rr\n", 3);
 }
