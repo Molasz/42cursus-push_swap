@@ -15,6 +15,8 @@
 
 # include "libft/libft.h"
 
+#include <stdio.h>
+
 void	swap_a(t_list *stk);
 void	swap_b(t_list *stk);
 void	swap_ab(t_list *stk_a, t_list *stk_b);

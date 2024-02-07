@@ -22,7 +22,7 @@ OBJS	= ${SRCS:.c=.o}
 
 DEPS	= ${SRCS:.c=.d}
 
-NAME	= push_swap.a
+NAME	= push_swap
 
 LIB		= libft
 
