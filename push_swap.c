@@ -12,29 +12,41 @@
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+static int	on_error()
 {
-	char	*snums;
-	char	**nums;
+	write(1, "ERROR\n", 6);
+	return (1);
+}
+
+char	**get_numsstr(int argc, char **argv)
+{
+	char	*str;
 
 	if (argc == 1)
 	{
-		snums = get_next_line(0);
-		if (!snums)
-			return (-1);
-		nums = ft_split(snums, ' ');
-		free(snums);
+		str = get_next_line(0);
+		if (!str)
+			return (NULL);
+		return (ft_split(str, ' '));
 	}
-	else if (argc == 2)
-	{
-		snums = argv[1];
-		nums = ft_split(snums, ' ');
-	}
-	else
-		nums = argv + 1;
-	if (!nums)
-		return (-1);
-	if (argc < 3)
-		free(nums);
+	if (argc == 2)
+		return (ft_split(argv[1], ' '));
+
+}
+
+int	main(int argc, char **argv)
+{
+	char	**numsstr;
+	int		*nums;
+
+	numsstr = get_numsstr(argc, argv);
+	if (!numsstr || check_numsstr(numsstr))
+		return (on_error());
+	nums = get_nums(numsstr);
+	free(numsstr);
+	if (!nums || check_nums(nums))
+		return (on_error());
+	sort(nums);
+	free(nums);
 	return (0);
 }
