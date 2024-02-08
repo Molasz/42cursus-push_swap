@@ -12,16 +12,29 @@
 
 #include "push_swap.h"
 
-void	print_stk(t_list	*stk)
+void	print_stks(t_list	*stk_a, t_list	*stk_b)
 {
 	t_list	*tmp;
 
-	printf("STK: %d, ", *(int *)stk->content);
-	tmp = stk->next;
-	while (stk != tmp)
+	printf("A: %d, ", *(int *)stk_a->content);
+	if (stk_a)
 	{
-		printf("%d, ", *(int *)tmp->content);
-		tmp = tmp->next;
+		tmp = stk_a->next;
+		while (stk_a != tmp)
+		{
+			printf("%d, ", *(int *)tmp->content);
+			tmp = tmp->next;
+		}
+	}
+	printf("\nB: %d, ", *(int *)stk_b->content);
+	if (stk_b)
+	{
+		tmp = stk_b->next;
+		while (stk_b != tmp)
+		{
+			printf("%d, ", *(int *)tmp->content);
+			tmp = tmp->next;
+		}
 	}
 	printf("\n");
 }
@@ -29,32 +42,25 @@ void	print_stk(t_list	*stk)
 int	sort(t_list	*stk_a)
 {
 	t_list	*stk_b;
+	int		max;
+	int		count;
 
 	stk_b = NULL;
-	print_stk(stk_a);
-	swap_a(stk_a);
-	print_stk(stk_a);
-	rotate_a(&stk_a);
-	print_stk(stk_a);
-	swap_a(stk_a);
-	print_stk(stk_a);
-	push_b(&stk_b, &stk_a);
-	print_stk(stk_a);
-	print_stk(stk_b);
-	push_b(&stk_b, &stk_a);
-	print_stk(stk_a);
-	print_stk(stk_b);
-	push_b(&stk_b, &stk_a);
-	print_stk(stk_a);
-	print_stk(stk_b);
-	push_b(&stk_b, &stk_a);
-	print_stk(stk_a);
-	print_stk(stk_b);
-	push_b(&stk_b, &stk_a);
-	print_stk(stk_a);
-	print_stk(stk_b);
-	push_a(&stk_a, &stk_b);
-	print_stk(stk_a);
-	print_stk(stk_b);
+	max = INT_MIN;
+	count = 0;
+	while (count++ != 15)
+	{
+		if(max < *(int *)stk_a->content)
+		{
+			max = *(int *)stk_a->content;
+			push_b(&stk_b, &stk_a);
+			rotate_b(&stk_b);
+		}
+		else if (*(int *)stk_a->content < *(int *)stk_b->content)
+			push_b(&stk_b, &stk_a);
+		else
+			rotate_a(&stk_a);
+		print_stks(stk_a, stk_b);
+	}
 	return (0);
 }

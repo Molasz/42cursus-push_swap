@@ -17,8 +17,11 @@ static void	push(t_list **dst, t_list **src)
 	t_list	*tmp;
 
 	(*src)->next->prev = (*src)->prev;
-	(*src)->prev->next = (*src)->next;
-	tmp = (*src)->next;
+	(*src)->prev->next = (*src)->next;	
+	if (*src == (*src)->next)
+		tmp = NULL;
+	else
+		tmp = (*src)->next;
 	if (*dst)
 	{
 		(*src)->next = *dst;
