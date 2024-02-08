@@ -10,15 +10,41 @@ t_list	*free_stk(t_list *stk, int len)
 {
 	t_list	*tmp;
 
-	while (len >= 0)
+	while (len--)
 	{
 		tmp = stk;
 		stk = stk->next;
-		tmp->content = NULL;
 		free(tmp);
-		len--;
 	}
 	return (NULL);
+}
+
+int	free_numsstr(char **numsstr)
+{
+	int	len;
+
+	len = 0;
+	while (numsstr[len])
+	{
+		free(numsstr[len]);
+		len++;
+	}
+	free(numsstr);
+	return (len);
+}
+
+t_list	*new_node(int *n)
+{
+	t_list	*elem;
+
+	elem = ft_calloc(sizeof (t_list), 1);
+	if (!elem)
+		return (NULL);
+	elem->content = n;
+	elem->next = elem;
+	elem->prev = elem;
+	return (elem);
+
 }
 
 t_list	*get_stk(int *nums, int len)
@@ -26,16 +52,19 @@ t_list	*get_stk(int *nums, int len)
 	t_list	*stk;
 	t_list	*tmp;
 
-	while (len >= 0)
+	stk = NULL;
+	while (len--)
 	{
-		tmp = ft_lstnew(nums + len);
+		tmp = ft_lstnew(nums + len - 1);
 		if (!tmp)
-			return (free_stk(stk, len));
-		tmp->next = stk;
-		tmp->prev = stk->prev;
-		stk->next = tmp;
+			return (free_stk(stk, len)); //TODO CLEAN
+		if (stk)
+		{
+			tmp->next = stk;
+			tmp->prev = stk->prev;
+			stk->prev = tmp;
+		}
 		stk = tmp;
-		len--;
 	}
 	return (stk);
 }

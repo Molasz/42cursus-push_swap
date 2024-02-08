@@ -107,6 +107,8 @@ int	main(int argc, char **argv)
 	char	**numsstr;
 	int		*nums;
 	int		len;
+	t_list	*stk;
+	int		error;
 
 	numsstr = get_numsstr(argc, argv);
 	if (!numsstr || check_numsstr(numsstr))
@@ -114,19 +116,16 @@ int	main(int argc, char **argv)
 	len = 0;
 	nums = get_nums(numsstr);
 	if (argc < 3)
-	{
-		while (numsstr[len])
-		{
-			free(numsstr[len]);
-			len++;
-		}
-		free(numsstr);
-	}
+		len = free_numsstr(numsstr);
 	else
 		len = argc - 1;
 	if (!nums || check_nums(nums, len))
 		return (on_error());
-	//sort(stk)
+	stk = get_stk(nums, len);
+	error = 0; //sort(stk, len);
+	free_stk(stk, len);
 	free(nums);
+	if (error)
+		return (on_error());
 	return (0);
 }

@@ -18,8 +18,9 @@
 #include <stdio.h>
 
 int		on_error(void);
-t_list	*get_stk(int *nums, int len);
+int		free_numsstr(char **numsstr);
 t_list	*free_stk(t_list *stk, int len);
+t_list	*get_stk(int *nums, int len);
 
 void	swap_a(t_list *stk);
 void	swap_b(t_list *stk);
