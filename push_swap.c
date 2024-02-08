@@ -20,18 +20,24 @@ static int	on_error()
 
 static char	**get_numsstr(int argc, char **argv)
 {
+	char	**numsstr;
 	char	*str;
+	char	*tmp;
 
-	if (argc == 1)
-	{
-		str = get_next_line(0);
-		if (!str)
-			return (NULL);
-		return (ft_split(str, ' '));
-	}
+	if (argc > 2)
+		return(argv + 1);
 	if (argc == 2)
 		return (ft_split(argv[1], ' '));
-	return (argv + 1);
+	tmp = get_next_line(0);
+	if (!tmp)
+		return (NULL);
+	str = ft_strtrim(tmp, "\n");
+	free(tmp);
+	if (!str)
+		return (NULL);
+	numsstr = ft_split(str, ' ');
+	free(str);
+	return (numsstr);
 }
 
 static int check_numsstr(char **nums)
@@ -65,7 +71,7 @@ static int	*get_nums(char **numsstr)
 	i = 0;
 	while (numsstr[i])
 		i++;
-	nums = ft_calloc(sizeof (int), i + 1);
+	nums = ft_calloc(sizeof (int), i);
 	i = 0;
 	while (numsstr[i])
 	{
@@ -78,7 +84,7 @@ static int	*get_nums(char **numsstr)
 	return (nums);
 }
 
-static int	check_nums(int *nums)
+static int	check_nums(int *nums, int len)
 {
 	int	i;
 	int	j;
@@ -86,14 +92,14 @@ static int	check_nums(int *nums)
 
 	low = 1;
 	i = 0;
-	while(nums[i])
+	while(i < len)
 	{
 		j = 0;
 		while (nums[j])
 		{
 			if (i != j && nums[j] == nums[i])
 				return (1);
-			if (i && nums[i - 1] > nums[i])
+			if (i > 0 && nums[i - 1] > nums[i])
 				low = 0;
 			j++;
 		}
@@ -106,24 +112,27 @@ int	main(int argc, char **argv)
 {
 	char	**numsstr;
 	int		*nums;
-	int		i;
+	int		len;
 
 	numsstr = get_numsstr(argc, argv);
 	if (!numsstr || check_numsstr(numsstr))
 		return (on_error());
+	len = 0;
 	nums = get_nums(numsstr);
-	if (argc < 2)
-		free(numsstr);
-	if (!nums || check_nums(nums))
-		return (on_error());
-	i = 0;
-	while (nums[i])
+	if (argc < 3)
 	{
-		printf("%d, ", nums[i]);
-		i++;
+		while (numsstr[len])
+		{
+			free(numsstr[len]);
+			len++;
+		}
+		free(numsstr);
 	}
-	printf("\n");
-	//sort(nums);
+	else
+		len = argc - 1;
+	if (!nums || check_nums(nums, len))
+		return (on_error());
+	//sort(stk)
 	free(nums);
 	return (0);
 }

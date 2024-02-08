@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 SRCS	= push_swap.c \
+		  	lst_utils.c \
 			swap.c \
 			push.c \
 			rotate.c \
@@ -24,7 +25,7 @@ DEPS	= ${SRCS:.c=.d}
 
 NAME	= push_swap
 
-LIB		= libft
+LIB		= libft/libft.a
 
 AR		= ar rcs
 
@@ -39,19 +40,21 @@ all:		${NAME}
 %.o:		%.c
 				${CC} ${CFLAGS} -c $< -MMD
 
-${NAME}:	lib ${OBJS} ${HEAD} Makefile
-				make -C ${LIB}
-				${CC} ${CFLAGS} ${OBJS} ${LIB}/${LIB}.a -o ${NAME}
+${LIB}:
+
+${NAME}:	${OBJS} ${HEAD} Makefile
+				make -C libft
+				${CC} ${CFLAGS} ${OBJS} ${LIB} -o ${NAME}
 
 clean:
 				${RM} ${OBJS} ${DEPS}
 
 fclean:		clean
-				make fclean -C ${LIB}
+				make fclean -C libft 
 				${RM} ${NAME}
 
 re:			fclean all
 
 -include ${DEPS}
 
-.PHONY:		clean fclean re all bonus lib
+.PHONY:		clean fclean re all bonus

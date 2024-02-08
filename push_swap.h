@@ -17,6 +17,9 @@
 
 #include <stdio.h>
 
+t_list	*get_stk(int *nums, int len);
+t_list	*free_stk(t_list *stk, int len);
+
 void	swap_a(t_list *stk);
 void	swap_b(t_list *stk);
 void	swap_ab(t_list *stk_a, t_list *stk_b);
