@@ -16,6 +16,7 @@ static void	reverse(t_list **stk)
 {
 	*stk = (*stk)->prev;
 }
+
 void	reverse_a(t_list **stk)
 {
 	reverse(stk);

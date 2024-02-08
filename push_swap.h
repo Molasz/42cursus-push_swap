@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PUSH_SWAP_H
-# define	PUSH_SWAP_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include "libft/libft.h"
 
 #include <stdio.h>
 
+int		on_error(void);
 t_list	*get_stk(int *nums, int len);
 t_list	*free_stk(t_list *stk, int len);
 

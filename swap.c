@@ -36,7 +36,6 @@ void	swap_b(t_list *stk)
 	write(1, "sb\n", 3);
 }
 
-
 void	swap_ab(t_list *stk_a, t_list *stk_b)
 {
 	swap(stk_a);

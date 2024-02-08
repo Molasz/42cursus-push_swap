@@ -12,12 +12,6 @@
 
 #include "push_swap.h"
 
-static int	on_error()
-{
-	write(2, "ERROR\n", 6);
-	return (1);
-}
-
 static char	**get_numsstr(int argc, char **argv)
 {
 	char	**numsstr;
@@ -25,7 +19,7 @@ static char	**get_numsstr(int argc, char **argv)
 	char	*tmp;
 
 	if (argc > 2)
-		return(argv + 1);
+		return (argv + 1);
 	if (argc == 2)
 		return (ft_split(argv[1], ' '));
 	tmp = get_next_line(0);
@@ -40,7 +34,7 @@ static char	**get_numsstr(int argc, char **argv)
 	return (numsstr);
 }
 
-static int check_numsstr(char **nums)
+static int	check_numsstr(char **nums)
 {
 	int	i;
 	int	j;
@@ -92,7 +86,7 @@ static int	check_nums(int *nums, int len)
 
 	low = 1;
 	i = 0;
-	while(i < len)
+	while (i < len)
 	{
 		j = 0;
 		while (nums[j])

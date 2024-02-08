@@ -1,5 +1,11 @@
 #include "push_swap.h"
 
+int	on_error(void)
+{
+	write(2, "ERROR\n", 6);
+	return (1);
+}
+
 t_list	*free_stk(t_list *stk, int len)
 {
 	t_list	*tmp;
@@ -7,7 +13,7 @@ t_list	*free_stk(t_list *stk, int len)
 	while (len >= 0)
 	{
 		tmp = stk;
-		stk = stk->next; 
+		stk = stk->next;
 		tmp->content = NULL;
 		free(tmp);
 		len--;
