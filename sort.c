@@ -16,7 +16,7 @@ void	print_stk(t_list	*stk)
 {
 	t_list	*tmp;
 
-	printf("STK: %d ", *(int *)stk->content);
+	printf("STK: %d, ", *(int *)stk->content);
 	tmp = stk->next;
 	while (stk != tmp)
 	{

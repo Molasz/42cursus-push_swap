@@ -68,7 +68,7 @@ t_list	*get_stk(int *nums, int len)
 	i = 0;
 	while (len > i)
 	{
-		tmp = new_node(nums + len - i);
+		tmp = new_node(nums + len - i - 1);
 		if (!tmp)
 			return (free_stk(stk, i));
 		if (stk)
