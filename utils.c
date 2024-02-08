@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 13:18:02 by molasz-a          #+#    #+#             */
+/*   Updated: 2024/02/08 16:42:57 by molasz-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	on_error(void)
@@ -44,20 +56,21 @@ t_list	*new_node(int *n)
 	elem->next = elem;
 	elem->prev = elem;
 	return (elem);
-
 }
 
 t_list	*get_stk(int *nums, int len)
 {
 	t_list	*stk;
 	t_list	*tmp;
+	int		i;
 
 	stk = NULL;
-	while (len--)
+	i = 0;
+	while (len > i)
 	{
-		tmp = ft_lstnew(nums + len - 1);
+		tmp = new_node(nums + len - i);
 		if (!tmp)
-			return (free_stk(stk, len)); //TODO CLEAN
+			return (free_stk(stk, i));
 		if (stk)
 		{
 			tmp->next = stk;
@@ -65,6 +78,10 @@ t_list	*get_stk(int *nums, int len)
 			stk->prev = tmp;
 		}
 		stk = tmp;
+		i++;
 	}
+	while (1 != len--)
+		tmp = tmp->next;
+	tmp->next = stk;
 	return (stk);
 }

@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 00:05:26 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/06 16:56:12 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:20:35 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,7 @@ int	main(int argc, char **argv)
 	if (!nums || check_nums(nums, len))
 		return (on_error());
 	stk = get_stk(nums, len);
-	error = 0; //sort(stk, len);
-	free_stk(stk, len);
+	error = sort(stk);
 	free(nums);
 	if (error)
 		return (on_error());

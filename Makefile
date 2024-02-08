@@ -6,12 +6,13 @@
 #    By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 19:46:01 by molasz            #+#    #+#              #
-#    Updated: 2024/02/06 00:14:42 by molasz           ###   ########.fr        #
+#    Updated: 2024/02/08 15:22:31 by molasz-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= push_swap.c \
 		  	utils.c \
+			sort.c \
 			swap.c \
 			push.c \
 			rotate.c \
@@ -38,7 +39,7 @@ CFLAGS	= -Wall -Wextra -Werror
 all:		${NAME}
 
 %.o:		%.c
-				${CC} ${CFLAGS} -c $< -MMD
+				${CC} ${CFLAGS} -c $< -MMD -g
 
 ${LIB}:
 

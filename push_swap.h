@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/06 00:04:01 by molasz           ###   ########.fr       */
+/*   Updated: 2024/02/08 15:34:02 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		on_error(void);
 int		free_numsstr(char **numsstr);
 t_list	*free_stk(t_list *stk, int len);
 t_list	*get_stk(int *nums, int len);
+
+int		sort(t_list *stk);
 
 void	swap_a(t_list *stk);
 void	swap_b(t_list *stk);
