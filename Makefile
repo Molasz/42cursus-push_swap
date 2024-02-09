@@ -6,7 +6,7 @@
 #    By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 19:46:01 by molasz            #+#    #+#              #
-#    Updated: 2024/02/08 15:22:31 by molasz-a         ###   ########.fr        #
+#    Updated: 2024/02/09 18:17:08 by molasz-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS	= push_swap.c \
 			swap.c \
 			push.c \
 			rotate.c \
-			reverse.c 
+			reverse.c \
+			print.c
 
 HEAD	= push_swap.h
 

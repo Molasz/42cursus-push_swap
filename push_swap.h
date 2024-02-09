@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/08 15:34:02 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:30:37 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void	rotate_ab(t_list **stk_a, t_list **stk_b);
 void	reverse_a(t_list **stk);
 void	reverse_b(t_list **stk);
 void	reverse_ab(t_list **stk_a, t_list **stk_b);
+
+void	print_stks(t_list	*stk_a, t_list	*stk_b);
 
 #endif

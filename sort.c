@@ -6,61 +6,91 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/08 17:34:34 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:31:41 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stks(t_list	*stk_a, t_list	*stk_b)
+int	stksize(t_list *stk)
 {
 	t_list	*tmp;
+	int		i;
 
-	printf("A: %d, ", *(int *)stk_a->content);
-	if (stk_a)
+	i = 0;
+	tmp = stk->prev;
+	while (stk != tmp)
 	{
-		tmp = stk_a->next;
-		while (stk_a != tmp)
-		{
-			printf("%d, ", *(int *)tmp->content);
-			tmp = tmp->next;
-		}
+		i++;
+		stk = stk->next;
 	}
-	printf("\nB: %d, ", *(int *)stk_b->content);
-	if (stk_b)
+	return (i);
+}
+
+void	put_n(t_list **stk_a, t_list **stk_b)
+{
+	t_list	*tmp;
+	int		count;
+	int		len;
+	int		i;
+
+	i = 0;
+	count = 0;
+	len = stksize(*stk_b);
+	tmp = *stk_b;
+	while (*(int *)(*stk_a)->content < *(int *)tmp->content)
 	{
-		tmp = stk_b->next;
-		while (stk_b != tmp)
-		{
-			printf("%d, ", *(int *)tmp->content);
-			tmp = tmp->next;
-		}
+		count++;
+		tmp = tmp->next;
 	}
-	printf("\n");
+	if (count > len / 2)
+	{
+		while (i++ < count)
+			rotate_b(stk_b);
+		push_b(stk_b, stk_a);
+		while (count-- > 0)
+			reverse_b(stk_b);
+	}
+	else
+	{
+		while (i++ < count)
+			reverse_b(stk_b);
+		push_b(stk_b, stk_a);
+		while (count-- > 0)
+			rotate_b(stk_b);
+	}
 }
 
 int	sort(t_list	*stk_a)
 {
 	t_list	*stk_b;
 	int		max;
+	int		min;
 	int		count;
 
 	stk_b = NULL;
+	min = INT_MAX;
 	max = INT_MIN;
 	count = 0;
-	while (count++ != 15)
+	while (stk_a)
 	{
-		if(max < *(int *)stk_a->content)
+
+		if(max <= *(int *)stk_a->content)
 		{
 			max = *(int *)stk_a->content;
 			push_b(&stk_b, &stk_a);
+		}
+		else if(min >= *(int *)stk_a->content)
+		{
+			min = *(int *)stk_a->content;
+			push_b(&stk_b, &stk_a);
 			rotate_b(&stk_b);
 		}
-		else if (*(int *)stk_a->content < *(int *)stk_b->content)
-			push_b(&stk_b, &stk_a);
 		else
-			rotate_a(&stk_a);
-		print_stks(stk_a, stk_b);
+			put_n(&stk_a, &stk_b);
 	}
+	while (stk_b)
+		push_a(&stk_a, &stk_b);
+	print_stks(stk_a, stk_b);
 	return (0);
 }
