@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 00:05:26 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/08 16:20:35 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/10 17:29:24 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ static int	check_nums(int *nums, int len)
 {
 	int	i;
 	int	j;
-	int	low;
 
-	low = 1;
 	i = 0;
 	while (i < len)
 	{
@@ -93,13 +91,11 @@ static int	check_nums(int *nums, int len)
 		{
 			if (i != j && nums[j] == nums[i])
 				return (1);
-			if (i > 0 && nums[i - 1] > nums[i])
-				low = 0;
 			j++;
 		}
 		i++;
 	}
-	return (low);
+	return (0);
 }
 
 int	main(int argc, char **argv)

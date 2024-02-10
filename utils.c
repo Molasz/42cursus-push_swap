@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:18:02 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/08 16:42:57 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/10 17:22:43 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ t_list	*get_stk(int *nums, int len)
 		stk = tmp;
 		i++;
 	}
-	while (1 != len--)
-		tmp = tmp->next;
-	tmp->next = stk;
+	stk->prev->next = stk;
 	return (stk);
 }
