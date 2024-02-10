@@ -27,38 +27,58 @@ int	stksize(t_list *stk)
 	return (i);
 }
 
+void	put_front(t_list **stk_a, t_list **stk_b, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < count)
+		rotate_b(stk_b);
+	push_b(stk_b, stk_a);
+	i = 0;
+	while (i++ < count)
+		reverse_b(stk_b);
+}
+
+void	put_back(t_list **stk_a, t_list **stk_b, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < count)
+		reverse_b(stk_b);
+	push_b(stk_b, stk_a);
+	i = 0;
+	while (i++ < count + 1)
+		rotate_b(stk_b);
+}
+
 void	put_n(t_list **stk_a, t_list **stk_b)
 {
 	t_list	*tmp;
-	int		count;
+	int		front;
+	int		back;
 	int		len;
-	int		i;
 
-	i = 0;
-	count = 0;
 	len = stksize(*stk_b);
 	tmp = *stk_b;
+	front = 0;
 	while (*(int *)(*stk_a)->content < *(int *)tmp->content)
 	{
-		count++;
+		front++;
 		tmp = tmp->next;
 	}
-	if (count > len / 2)
+	tmp = (*stk_b)->prev;
+	back = 0;
+	while (*(int *)(*stk_a)->content > *(int *)tmp->content)
 	{
-		while (i++ < count)
-			rotate_b(stk_b);
-		push_b(stk_b, stk_a);
-		while (count-- > 0)
-			reverse_b(stk_b);
+		back++;
+		tmp = tmp->prev;
 	}
+	if (front < (len / 2) + 1)
+		put_front(stk_a, stk_b, front);
 	else
-	{
-		while (i++ < count)
-			reverse_b(stk_b);
-		push_b(stk_b, stk_a);
-		while (count-- > 0)
-			rotate_b(stk_b);
-	}
+		put_back(stk_a, stk_b, back);
 }
 
 int	sort(t_list	*stk_a)
@@ -66,21 +86,19 @@ int	sort(t_list	*stk_a)
 	t_list	*stk_b;
 	int		max;
 	int		min;
-	int		count;
 
 	stk_b = NULL;
 	min = INT_MAX;
 	max = INT_MIN;
-	count = 0;
+	//print_stks(stk_a, stk_b);
 	while (stk_a)
 	{
-
-		if(max <= *(int *)stk_a->content)
+		if (max <= *(int *)stk_a->content)
 		{
 			max = *(int *)stk_a->content;
 			push_b(&stk_b, &stk_a);
 		}
-		else if(min >= *(int *)stk_a->content)
+		else if (min >= *(int *)stk_a->content)
 		{
 			min = *(int *)stk_a->content;
 			push_b(&stk_b, &stk_a);
@@ -88,9 +106,10 @@ int	sort(t_list	*stk_a)
 		}
 		else
 			put_n(&stk_a, &stk_b);
+		//print_stks(stk_a, stk_b);
 	}
 	while (stk_b)
 		push_a(&stk_a, &stk_b);
-	print_stks(stk_a, stk_b);
+	//print_stks(stk_a, stk_b);
 	return (0);
 }

@@ -40,7 +40,7 @@ CFLAGS	= -Wall -Wextra -Werror
 all:		${NAME}
 
 %.o:		%.c
-				${CC} ${CFLAGS} -c $< -MMD -g
+				${CC} ${CFLAGS} -c $< -MMD
 
 ${LIB}:
 

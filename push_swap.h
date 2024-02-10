@@ -15,7 +15,7 @@
 
 # include "libft/libft.h"
 
-#include <stdio.h>
+# include <stdio.h>
 
 int		on_error(void);
 int		free_numsstr(char **numsstr);

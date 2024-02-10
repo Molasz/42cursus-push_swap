@@ -1,5 +1,5 @@
 push_swap
-checker_Mac
+checker_*
 *.a
 *.o
 *.d
