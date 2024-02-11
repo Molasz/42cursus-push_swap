@@ -18,87 +18,80 @@ static int	stksize(t_list *stk)
 	int		i;
 
 	i = 0;
+	if (!stk)
+		return (0);
 	tmp = stk->prev;
 	while (stk != tmp)
 	{
 		i++;
 		stk = stk->next;
 	}
-	return (i);
+	return (i + 1);
 }
 
-static void	put_front(t_list **stk_a, t_list **stk_b, int count)
-{
-	int	i;
-
-	i = 0;
-	while (i++ < count)
-		rotate_b(stk_b);
-	push_b(stk_b, stk_a);
-	i = 0;
-	while (i++ < count)
-		reverse_b(stk_b);
-}
-
-static void	put_back(t_list **stk_a, t_list **stk_b, int count)
-{
-	int	i;
-
-	i = 0;
-	while (i++ < count)
-		reverse_b(stk_b);
-	push_b(stk_b, stk_a);
-	i = 0;
-	while (i++ < count + 1)
-		rotate_b(stk_b);
-}
-
-static void	put_n(t_list **stk_a, t_list **stk_b)
+static int	calc_move(t_list *stk_a, t_list *stk_b, int min, int max)
 {
 	t_list	*tmp;
-	int		front;
-	int		back;
+	int		size;
 	int		len;
 
-	len = stksize(*stk_b);
-	tmp = *stk_b;
-	front = 0;
-	while (*(int *)(*stk_a)->content < *(int *)tmp->content)
+	size = 0;
+	tmp = stk_b;
+	len = stksize(stk_b);
+	while (size < len)
 	{
-		front++;
+		if (stk_a->num < min && tmp->prev->num == min)
+			return (size);
+		if (stk_a->num > max && tmp->num == max)
+			return (size);
+		if (stk_a->num < tmp->prev->num && stk_a->num > tmp->num)
+			return (size);
+		size++;
 		tmp = tmp->next;
 	}
-	tmp = (*stk_b)->prev;
-	back = 0;
-	while (*(int *)(*stk_a)->content > *(int *)tmp->content)
-	{
-		back++;
-		tmp = tmp->prev;
-	}
-	if (front < (len / 2) + 1)
-		put_front(stk_a, stk_b, front);
-	else
-		put_back(stk_a, stk_b, back);
+	return (size);
 }
 
-void	algorithm(t_list **stk_a, t_list **stk_b, int max, int min)
+static void	put_n(t_list **stk_a, t_list **stk_b, int min, int max)
 {
+	int	moves;
+	int	len;
+
+	len = stksize(*stk_b);
+	moves = calc_move(*stk_a, *stk_b, min, max);
+	if (moves < (len / 2) + 1)
+	{
+		while (moves-- > 0)
+			rotate_b(stk_b);
+	}
+	else
+	{
+		moves = len - moves + 1;
+		while (moves-- > 1)
+			reverse_b(stk_b);
+	}
+	push_b(stk_b, stk_a);
+}
+
+void	algorithm(t_list **stk_a, t_list **stk_b)
+{
+	int	max;
+	int	min;
+
+	min = (*stk_a)->num;
+	max = (*stk_a)->num;
+	push_b(stk_b, stk_a);
 	while (*stk_a)
 	{
-		if (max <= *(int *)(*stk_a)->content)
-		{
-			max = *(int *)(*stk_a)->content;
-			push_b(stk_b, stk_a);
-		}
-		else if (min >= *(int *)(*stk_a)->content)
-		{
-			min = *(int *)(*stk_a)->content;
-			push_b(stk_b, stk_a);
-			rotate_b(stk_b);
-		}
-		else
-			put_n(stk_a, stk_b);
+		put_n(stk_a, stk_b, min, max);
+		if (max <= (*stk_b)->num)
+			max = (*stk_b)->num;
+		if (min >= (*stk_b)->num)
+			min = (*stk_b)->num;
+		//print_stks(*stk_a, *stk_b);
 	}
+	while ((*stk_b)->num != max)
+		rotate_b(stk_b);
 	while (*stk_b)
 		push_a(stk_a, stk_b);
 }

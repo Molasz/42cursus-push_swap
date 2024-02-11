@@ -18,24 +18,25 @@ void	print_stks(t_list	*stk_a, t_list	*stk_b)
 
 	if (stk_a)
 	{
-		printf("A: %d, ", *(int *)stk_a->content);
+		printf("A: %d, ", stk_a->num);
 		tmp = stk_a->next;
 		while (stk_a != tmp)
 		{
-			printf("%d, ", *(int *)tmp->content);
+			printf("%d, ", tmp->num);
 			tmp = tmp->next;
 		}
 		printf("\n");
 	}
 	if (stk_b)
 	{
-		printf("B: %d, ", *(int *)stk_b->content);
+		printf("B: %d, ", stk_b->num);
 		tmp = stk_b->next;
 		while (stk_b != tmp)
 		{
-			printf("%d, ", *(int *)tmp->content);
+			printf("%d, ", tmp->num);
 			tmp = tmp->next;
 		}
 		printf("\n");
 	}
+	printf("\n\n\n");
 }

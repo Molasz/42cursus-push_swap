@@ -14,8 +14,14 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
-
 # include <stdio.h>
+
+typedef struct s_list
+{
+	int				num;
+	struct s_list	*next;
+	struct s_list	*prev;
+}				t_list;
 
 int		on_error(void);
 int		free_numsstr(char **numsstr);
@@ -24,7 +30,7 @@ t_list	*get_stk(int *nums, int len);
 
 int		sort(t_list *stk);
 
-void	algorithm(t_list **stk_a, t_list **stk_b, int max, int min);
+void	algorithm(t_list **stk_a, t_list **stk_b);
 
 void	swap_a(t_list *stk);
 void	swap_b(t_list *stk);

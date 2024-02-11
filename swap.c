@@ -14,13 +14,13 @@
 
 static void	swap(t_list *stk)
 {
-	int	*n;
+	int	num;
 
 	if (stk)
 	{
-		n = stk->next->content;
-		stk->next->content = stk->content;
-		stk->content = n;
+		num = stk->next->num;
+		stk->next->num = stk->num;
+		stk->num = num;
 	}
 }
 

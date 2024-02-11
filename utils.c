@@ -31,7 +31,7 @@ t_list	*free_stk(t_list *stk, int len)
 	return (NULL);
 }
 
-int	free_numsstr(char **numsstr)
+int	free_numsstr(char **numsstr) //DELETE
 {
 	int	len;
 
@@ -52,7 +52,7 @@ t_list	*new_node(int *n)
 	elem = ft_calloc(sizeof (t_list), 1);
 	if (!elem)
 		return (NULL);
-	elem->content = n;
+	elem->num = *n;
 	elem->next = elem;
 	elem->prev = elem;
 	return (elem);

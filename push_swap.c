@@ -104,7 +104,6 @@ int	main(int argc, char **argv)
 	int		*nums;
 	int		len;
 	t_list	*stk;
-	int		error;
 
 	numsstr = get_numsstr(argc, argv);
 	if (!numsstr || check_numsstr(numsstr))
@@ -118,9 +117,7 @@ int	main(int argc, char **argv)
 	if (!nums || check_nums(nums, len))
 		return (on_error());
 	stk = get_stk(nums, len);
-	error = sort(stk);
+	sort(stk);
 	free(nums);
-	if (error)
-		return (on_error());
 	return (0);
 }

@@ -19,7 +19,7 @@ int	is_sorted(t_list	*stk)
 	tmp = stk->next;
 	while (stk != tmp)
 	{
-		if (*(int *)tmp->prev->content > *(int *)tmp->content)
+		if (tmp->prev->num > tmp->num)
 			return (0);
 		tmp = tmp->next;
 	}
@@ -33,7 +33,8 @@ int	sort(t_list	*stk_a)
 	stk_b = NULL;
 	if (is_sorted(stk_a))
 		return (0);
-	algorithm(&stk_a, &stk_b, INT_MIN, INT_MAX);
+	//print_stks(stk_a, stk_b);
+	algorithm(&stk_a, &stk_b);
 	//print_stks(stk_a, stk_b);
 	return (0);
 }
