@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/11 13:29:49 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:14:14 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	calc_move(int num, t_list *stk_b, int min, int max)
 	len = stksize(stk_b);
 	while (size < len)
 	{
-		if (num < min && tmp->prev->num == min)
+		if (num < min && tmp->num == max)
 			return (size);
 		if (num > max && tmp->num == max)
 			return (size);
@@ -78,10 +78,11 @@ static void	find_low(t_list **stk_a)
 	len = stksize(*stk_a);
 	i = 0;
 	lown = (*stk_a)->moves;
+	lowp = 0;
 	tmp = *stk_a;
 	while (i < len)
 	{
-		if (tmp->moves <= lown + i)
+		if (tmp->moves + i < lown)
 		{
 			lown = tmp->moves;
 			lowp = i;
@@ -97,7 +98,7 @@ static void	find_low(t_list **stk_a)
 	else
 	{
 		lowp = len - lowp + 1;
-		while (lowp-- > 1)
+		while (lowp-- > 2)
 			reverse_a(stk_a);
 	}
 }
