@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/11 15:14:14 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:36:06 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,33 @@ static void	put_n(t_list **stk_a, t_list **stk_b, int min, int max)
 	push_b(stk_b, stk_a);
 }
 
+static void	order_stk(t_list **stk_b, int max)
+{
+	t_list	*tmp;
+	int		len;
+	int		i;
+
+	len = stksize(*stk_b);
+	tmp = *stk_b;
+	i = 0;
+	while (tmp->num != max)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	if (i < (len / 2) + 1)
+	{
+		while (i-- > 0)
+			rotate_b(stk_b);
+	}
+	else
+	{
+		i = len - i + 1;
+		while (i-- > 1)
+			reverse_b(stk_b);
+	}
+}
+
 void	algorithm(t_list **stk_a, t_list **stk_b)
 {
 	int	max;
@@ -143,8 +170,7 @@ void	algorithm(t_list **stk_a, t_list **stk_b)
 			min = (*stk_b)->num;
 		//print_stks(*stk_a, *stk_b);
 	}
-	while ((*stk_b)->num != max)
-		rotate_b(stk_b);
+	order_stk(stk_b, max);
 	while (*stk_b)
 		push_a(stk_a, stk_b);
 }
