@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 23:27:38 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/09 17:53:19 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/11 12:40:41 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	push(t_list **dst, t_list **src)
 {
 	t_list	*tmp;
 
+	(*src)->moves = 0;
 	(*src)->next->prev = (*src)->prev;
 	(*src)->prev->next = (*src)->next;
 	if (*src == (*src)->next)

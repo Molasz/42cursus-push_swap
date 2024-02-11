@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:16:32 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/09 18:16:34 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/11 12:28:51 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	print_stks(t_list	*stk_a, t_list	*stk_b)
 
 	if (stk_a)
 	{
-		printf("A: %d, ", stk_a->num);
+		printf("A: %d (%d), ", stk_a->num, stk_a->moves);
 		tmp = stk_a->next;
 		while (stk_a != tmp)
 		{
-			printf("%d, ", tmp->num);
+			printf("%d (%d), ", tmp->num, tmp->moves);
 			tmp = tmp->next;
 		}
 		printf("\n");

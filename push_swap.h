@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/10 18:23:39 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/11 12:15:23 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_list
 {
 	int				num;
+	int				moves;
 	struct s_list	*next;
 	struct s_list	*prev;
 }				t_list;
