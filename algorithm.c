@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/11 15:36:06 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:27:44 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	update_moves(t_list *stk_a, t_list *stk_b, int min, int max)
 	}
 }
 
-static void	find_low(t_list **stk_a)
+static void	find_low(t_list **stk_a, t_list **stk_b)
 {
 	t_list	*tmp;
 	int		len;
@@ -92,12 +92,22 @@ static void	find_low(t_list **stk_a)
 	}
 	if (lowp < (len / 2) + 1)
 	{
+		while (lown > 0 && lowp >= lown)
+		{
+			rotate_ab(stk_a, stk_b);
+			lowp--;
+		}
 		while (lowp-- > 0)
 			rotate_a(stk_a);
 	}
 	else
 	{
 		lowp = len - lowp + 1;
+		while (lowp >= lown)
+		{
+			reverse_ab(stk_a, stk_b);
+			lowp--;
+		}
 		while (lowp-- > 2)
 			reverse_a(stk_a);
 	}
@@ -162,13 +172,13 @@ void	algorithm(t_list **stk_a, t_list **stk_b)
 	while (*stk_a)
 	{
 		update_moves(*stk_a, *stk_b, min, max);
-		find_low(stk_a);
+		find_low(stk_a, stk_b);
 		put_n(stk_a, stk_b, min, max);
 		if (max <= (*stk_b)->num)
 			max = (*stk_b)->num;
 		if (min >= (*stk_b)->num)
 			min = (*stk_b)->num;
-		//print_stks(*stk_a, *stk_b);
+	//	print_stks(*stk_a, *stk_b);
 	}
 	order_stk(stk_b, max);
 	while (*stk_b)
