@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/11 12:15:23 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/12 18:50:25 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ typedef struct s_list
 	struct s_list	*next;
 	struct s_list	*prev;
 }				t_list;
+
+typedef struct s_limit
+{
+	int	max;
+	int	min;
+}				t_limit;
 
 int		on_error(void);
 int		free_numsstr(char **numsstr);

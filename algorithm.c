@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/11 17:27:44 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/12 20:09:16 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	stksize(t_list *stk)
 	return (i + 1);
 }
 
-static int	calc_move(int num, t_list *stk_b, int min, int max)
+static int	calc_move(int num, t_list *stk_b, t_limit limit)
 {
 	t_list	*tmp;
 	int		size;
@@ -40,20 +40,39 @@ static int	calc_move(int num, t_list *stk_b, int min, int max)
 	len = stksize(stk_b);
 	while (size < len)
 	{
-		if (num < min && tmp->num == max)
+		if (num < limit.min && tmp->num == limit.max)
 			return (size);
-		if (num > max && tmp->num == max)
+		if (num > limit.max && tmp->num == limit.max)
 			return (size);
 		if (num < tmp->prev->num && num > tmp->num)
 			return (size);
 		size++;
 		tmp = tmp->next;
 	}
-	return (size);
+	if (size < (len / 2) + 1)
+		return (size);
+	else
+		return (size - len);
 }
 
-static void	update_moves(t_list *stk_a, t_list *stk_b, int min, int max)
+int	abs_move(int n)
 {
+	if (n < 0)
+		return (-n);
+	return (n);
+}
+
+int	max_move(int n1, int n2)
+{
+	if (abs_move(n1) > abs_move(n2))
+		return (n1);
+	return (n2);
+}
+
+static void	update_moves(t_list *stk_a, t_list *stk_b, t_limit limit)
+{
+	int	bpos;
+	int	apos;
 	int	len;
 	int	i;
 
@@ -61,75 +80,95 @@ static void	update_moves(t_list *stk_a, t_list *stk_b, int min, int max)
 	i = 0;
 	while (i < len)
 	{
-		stk_a->moves = calc_move(stk_a->num, stk_b, min, max);
+		bpos = calc_move(stk_a->num, stk_b, limit);
+		if (i > (len / 2) + 1)
+			apos = i - len;
+		else
+			apos = i;
+		if ((apos > 0 && bpos > 0) || (apos < 0 && bpos < 0))
+			stk_a->moves = max_move(apos, bpos);
+		else
+			stk_a->moves = abs(apos) + abs(bpos);
 		stk_a = stk_a->next;
 		i++;
 	}
+	print_stks(stk_a, stk_b);
 }
 
-static void	find_low(t_list **stk_a, t_list **stk_b)
+static int	find_low(t_list **stk_a)
 {
 	t_list	*tmp;
+	int		moves;
+	int		pos;
 	int		len;
-	int		lown;
-	int		lowp;
 	int		i;
 
 	len = stksize(*stk_a);
 	i = 0;
-	lown = (*stk_a)->moves;
-	lowp = 0;
+	moves = (*stk_a)->moves;
+	pos = 0;
 	tmp = *stk_a;
 	while (i < len)
 	{
-		if (tmp->moves + i < lown)
+		if (tmp->moves < moves)
 		{
-			lown = tmp->moves;
-			lowp = i;
+			moves = tmp->moves;
+			pos = i;
 		}
 		tmp = tmp->next;
 		i++;
 	}
-	if (lowp < (len / 2) + 1)
-	{
-		while (lown > 0 && lowp >= lown)
-		{
-			rotate_ab(stk_a, stk_b);
-			lowp--;
-		}
-		while (lowp-- > 0)
-			rotate_a(stk_a);
-	}
-	else
-	{
-		lowp = len - lowp + 1;
-		while (lowp >= lown)
-		{
-			reverse_ab(stk_a, stk_b);
-			lowp--;
-		}
-		while (lowp-- > 2)
-			reverse_a(stk_a);
-	}
+	return (pos);
 }
 
-static void	put_n(t_list **stk_a, t_list **stk_b, int min, int max)
+static void	put_n(int apos, t_list **stk_a, t_list **stk_b, t_limit limit)
 {
-	int	moves;
-	int	len;
+	t_list	*tmp;
+	int		bpos;
+	int		alen;
+	int		i;
 
-	len = stksize(*stk_b);
-	moves = calc_move((*stk_a)->num, *stk_b, min, max);
-	if (moves < (len / 2) + 1)
+	tmp = *stk_a;
+	i= 0;
+	while (apos < i)
+		tmp = tmp->next;
+	bpos = calc_move(tmp->num, *stk_b, limit);
+	
+	alen = stksize(*stk_a);
+	if (apos > (alen / 2) + 1)
+		apos -= alen;
+	printf("A:%d B:%d\n", apos, bpos);
+	if (apos > 0 && bpos > 0)
 	{
-		while (moves-- > 0)
-			rotate_b(stk_b);
+		while (apos-- > 0 && bpos-- > 0)
+			rotate_ab(stk_a, stk_b);
+		while (apos-- > 0)
+			rotate_a(stk_a);
+		while (bpos-- > 0)
+			rotate_b(stk_a);
 	}
-	else
+	else if (apos < 0 && bpos < 0)
 	{
-		moves = len - moves + 1;
-		while (moves-- > 1)
+		while (apos++ < 0 && bpos++ < 0)
+			reverse_ab(stk_a, stk_b);
+		while (apos++ < 0)
+			reverse_a(stk_a);
+		while (bpos++ < 0)
 			reverse_b(stk_b);
+	}
+	else if (apos > 0 && bpos < 0)
+	{
+		while (apos-- > 0)
+			rotate_a(stk_a);
+		while (bpos++ < 0)
+			reverse_b(stk_b);
+	}
+	else if (apos < 0 && bpos > 0)
+	{
+		while (apos++ < 0)
+			reverse_a(stk_a);
+		while (bpos-- > 0)
+			rotate_b(stk_b);
 	}
 	push_b(stk_b, stk_a);
 }
@@ -163,24 +202,24 @@ static void	order_stk(t_list **stk_b, int max)
 
 void	algorithm(t_list **stk_a, t_list **stk_b)
 {
-	int	max;
-	int	min;
+	t_limit	limit;
+	int	apos;
 
-	min = (*stk_a)->num;
-	max = (*stk_a)->num;
+	limit.min = (*stk_a)->num;
+	limit.max = (*stk_a)->num;
 	push_b(stk_b, stk_a);
 	while (*stk_a)
 	{
-		update_moves(*stk_a, *stk_b, min, max);
-		find_low(stk_a, stk_b);
-		put_n(stk_a, stk_b, min, max);
-		if (max <= (*stk_b)->num)
-			max = (*stk_b)->num;
-		if (min >= (*stk_b)->num)
-			min = (*stk_b)->num;
-	//	print_stks(*stk_a, *stk_b);
+		update_moves(*stk_a, *stk_b, limit);
+		apos = find_low(stk_a);
+		put_n(apos, stk_a, stk_b, limit);
+		if (limit.max <= (*stk_b)->num)
+			limit.max = (*stk_b)->num;
+		if (limit.min >= (*stk_b)->num)
+			limit.min = (*stk_b)->num;
+	//print_stks(*stk_a, *stk_b);
 	}
-	order_stk(stk_b, max);
+	order_stk(stk_b, limit.max);
 	while (*stk_b)
 		push_a(stk_a, stk_b);
 }
