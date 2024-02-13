@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 18:53:16 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:48:24 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,6 @@ static int	is_sorted(t_list	*stk)
 		tmp = tmp->next;
 	}
 	return (1);
-}
-
-static	void	sort_full(t_list **stk_a, t_list **stk_b, t_limits *limits)
-{
-	push_b(stk_b, stk_a);
-	push_b(stk_b, stk_a);
-	if ((*stk_b)->num > (*stk_b)->next->num)
-	{
-		limits->max = (*stk_b)->num;
-		limits->min = (*stk_b)->next->num;
-	}
-	else
-	{
-		limits->max = (*stk_b)->next->num;
-		limits->min = (*stk_b)->num;
-	}
-	algorithm(stk_a, stk_b, limits);
 }
 
 static	void	sort_three(t_list **stk_a, t_limits *limits)
@@ -79,6 +62,34 @@ static void	sort_final(t_list **stk_a, t_list **stk_b, t_limits *limits)
 	}
 }
 
+void	order(t_list **stk_a, t_list **stk_b, t_limits *limits)
+{
+	t_list	*tmp;
+	int		count;
+	int		len;
+
+	len = stksize(*stk_a);
+	count = 0;
+	tmp = *stk_a;
+	while (tmp->num != limits->min)
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	if (count < len / 2)
+	{
+		while (count-- > 0)
+			rotate_a(stk_a);
+	}
+	else
+	{
+		count = len - count;
+		while (count-- > 0)
+			reverse_a(stk_a);
+	}
+	(void)stk_b;
+}
+
 int	sort(t_list	*stk_a)
 {
 	t_list		*stk_b;
@@ -93,8 +104,7 @@ int	sort(t_list	*stk_a)
 		sort_full(&stk_a, &stk_b, &limits);
 	sort_three(&stk_a, &limits);
 	sort_final(&stk_a, &stk_b, &limits);
-	while (stk_a->num > stk_a->prev->num)
-		reverse_a(&stk_a);
+	order(&stk_a, &stk_b, &limits);
 	free_stk(stk_a, stksize(stk_a));
 	free_stk(stk_b, stksize(stk_b));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/13 14:42:34 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:32:16 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ t_list	*free_stk(t_list *stk, int len);
 t_list	*get_stk(int *nums, int len);
 
 int		sort(t_list *stk);
+void	order(t_list **stk_a, t_list **stk_b, t_limits *limits);
 
-void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits);
+void	sort_full(t_list **stk_a, t_list **stk_b, t_limits *limits);
 void	push_num(int num, t_list **stk_a, t_list **stk_b, t_limits *limits);
 int		stksize(t_list *stk);
 int		abs_move(int n);

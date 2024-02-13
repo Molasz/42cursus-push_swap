@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 18:20:00 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:31:39 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	find_low(t_list **stk_a)
 	return (pos);
 }
 
-void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits)
+static void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits)
 {
 	int	apos;
 
@@ -77,5 +77,21 @@ void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits)
 		if (limits->min > (*stk_b)->num)
 			limits->min = (*stk_b)->num;
 	}
-	//order_stk(stk_b, limits->max);
+}
+
+void	sort_full(t_list **stk_a, t_list **stk_b, t_limits *limits)
+{
+	push_b(stk_b, stk_a);
+	push_b(stk_b, stk_a);
+	if ((*stk_b)->num > (*stk_b)->next->num)
+	{
+		limits->max = (*stk_b)->num;
+		limits->min = (*stk_b)->next->num;
+	}
+	else
+	{
+		limits->max = (*stk_b)->next->num;
+		limits->min = (*stk_b)->num;
+	}
+	algorithm(stk_a, stk_b, limits);
 }
