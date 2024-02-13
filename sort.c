@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 16:09:25 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:41:59 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	sort(t_list	*stk_a)
 		sort_full(&stk_a, &stk_b, &limits);
 	sort_three(&stk_a, &limits);
 	sort_final(&stk_a, &stk_b, &limits);
+	print_stks(stk_a, stk_b);
 	free_stk(stk_a, stksize(stk_a));
 	free_stk(stk_b, stksize(stk_b));
 	return (0);

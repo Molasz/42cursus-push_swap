@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 00:05:26 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/13 11:03:21 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:36:24 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static int	check_numsstr(char **nums)
 		j = 0;
 		while (nums[i][j])
 		{
-			if (nums[i][j] != '-' && (nums[i][j] < '0' || nums[i][j] > '9'))
+			if ((nums[i][j] != '-' && nums[i][j] != '+')
+				&& (nums[i][j] < '0' || nums[i][j] > '9'))
 				return (1);
 			j++;
 		}
@@ -87,7 +88,7 @@ static int	check_nums(int *nums, int len)
 	while (i < len)
 	{
 		j = 0;
-		while (nums[j])
+		while (j < len)
 		{
 			if (i != j && nums[j] == nums[i])
 				return (1);
