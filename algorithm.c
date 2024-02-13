@@ -6,13 +6,13 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 01:31:57 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:42:26 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	update_moves(t_list *stk_a, t_list *stk_b, t_limits limits)
+static void	update_moves(t_list *stk_a, t_list *stk_b, t_limits *limits)
 {
 	int	bpos;
 	int	apos;
@@ -90,21 +90,19 @@ static void	order_stk(t_list **stk_b, int max)
 	}
 }
 
-void	algorithm(t_list **stk_a, t_list **stk_b, t_limits limits)
+void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits)
 {
 	int	apos;
 
-	while (*stk_a)
+	while (stksize(*stk_a) > 3)
 	{
 		update_moves(*stk_a, *stk_b, limits);
 		apos = find_low(stk_a);
 		push_num(apos, stk_a, stk_b, limits);
-		if (limits.max < (*stk_b)->num)
-			limits.max = (*stk_b)->num;
-		if (limits.min > (*stk_b)->num)
-			limits.min = (*stk_b)->num;
+		if (limits->max < (*stk_b)->num)
+			limits->max = (*stk_b)->num;
+		if (limits->min > (*stk_b)->num)
+			limits->min = (*stk_b)->num;
 	}
-	order_stk(stk_b, limits.max);
-	while (*stk_b)
-		push_a(stk_a, stk_b);
+	order_stk(stk_b, limits->max);
 }

@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:18:02 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/10 17:22:43 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:06:11 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_list	*free_stk(t_list *stk, int len)
 {
 	t_list	*tmp;
 
+	if (!stk)
+		return (NULL);
 	while (len--)
 	{
 		tmp = stk;

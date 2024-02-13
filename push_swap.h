@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/13 01:32:07 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:42:34 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ t_list	*get_stk(int *nums, int len);
 
 int		sort(t_list *stk);
 
-void	algorithm(t_list **stk_a, t_list **stk_b, t_limits limits);
-void	push_num(int num, t_list **stk_a, t_list **stk_b, t_limits limits);
+void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits);
+void	push_num(int num, t_list **stk_a, t_list **stk_b, t_limits *limits);
 int		stksize(t_list *stk);
 int		abs_move(int n);
 int		max_move(int n1, int n2);
-int		calc_move(int num, t_list *stk_b, t_limits limits);
+int		calc_move(int num, t_list *stk_b, t_limits *limits);
 
 void	swap_a(t_list *stk);
 void	swap_b(t_list *stk);
