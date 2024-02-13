@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/11 14:51:35 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 01:07:25 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,25 @@ int	is_sorted(t_list	*stk)
 
 int	sort(t_list	*stk_a)
 {
-	t_list	*stk_b;
+	t_list		*stk_b;
+	t_limits	limits;
 
 	stk_b = NULL;
 	if (is_sorted(stk_a))
 		return (0);
-	algorithm(&stk_a, &stk_b);
+	push_b(&stk_b, &stk_a);
+	push_b(&stk_b, &stk_a);
+	if (stk_b->num > stk_b->next->num)
+	{
+		limits.max = stk_b->num;
+		limits.min = stk_b->next->num;
+	}
+	else
+	{
+		limits.max = stk_b->next->num;
+		limits.min = stk_b->num;
+	}
+	algorithm(&stk_a, &stk_b, limits);
 	//print_stks(stk_a, stk_b);
 	return (0);
 }
