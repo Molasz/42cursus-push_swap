@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 16:02:50 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:09:25 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	sort_final(t_list **stk_a, t_list **stk_b, t_limits *limits)
 			&& (*stk_a)->prev->num < (*stk_b)->num)
 			push_a(stk_a, stk_b);
 		else
-			rotate_a(stk_a);
+			reverse_a(stk_a);
 	}
 }
 
