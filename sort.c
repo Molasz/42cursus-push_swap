@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 01:07:25 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 01:19:44 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ int	sort(t_list	*stk_a)
 		limits.min = stk_b->num;
 	}
 	algorithm(&stk_a, &stk_b, limits);
-	//print_stks(stk_a, stk_b);
 	return (0);
 }
