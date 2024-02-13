@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 14:42:26 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:20:00 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,6 @@ static int	find_low(t_list **stk_a)
 	return (pos);
 }
 
-static void	order_stk(t_list **stk_b, int max)
-{
-	t_list	*tmp;
-	int		len;
-	int		i;
-
-	len = stksize(*stk_b);
-	tmp = *stk_b;
-	i = 0;
-	while (tmp->num != max)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	if (i < (len / 2) + 1)
-	{
-		while (i-- > 0)
-			rotate_b(stk_b);
-	}
-	else
-	{
-		i = len - i + 1;
-		while (i-- > 1)
-			reverse_b(stk_b);
-	}
-}
-
 void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits)
 {
 	int	apos;
@@ -104,5 +77,5 @@ void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits)
 		if (limits->min > (*stk_b)->num)
 			limits->min = (*stk_b)->num;
 	}
-	order_stk(stk_b, limits->max);
+	//order_stk(stk_b, limits->max);
 }

@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 16:41:59 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:53:16 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static	void	sort_three(t_list **stk_a, t_limits *limits)
 	limits->min = (*stk_a)->num;
 }
 
-void	sort_final(t_list **stk_a, t_list **stk_b, t_limits *limits)
+static void	sort_final(t_list **stk_a, t_list **stk_b, t_limits *limits)
 {
 	while (*stk_b)
 	{
@@ -93,7 +93,8 @@ int	sort(t_list	*stk_a)
 		sort_full(&stk_a, &stk_b, &limits);
 	sort_three(&stk_a, &limits);
 	sort_final(&stk_a, &stk_b, &limits);
-	print_stks(stk_a, stk_b);
+	while (stk_a->num > stk_a->prev->num)
+		reverse_a(&stk_a);
 	free_stk(stk_a, stksize(stk_a));
 	free_stk(stk_b, stksize(stk_b));
 	return (0);
