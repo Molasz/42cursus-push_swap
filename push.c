@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 23:27:38 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/11 12:40:41 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/14 00:04:12 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,24 @@ static void	push(t_list **dst, t_list **src)
 	*src = tmp;
 }
 
-void	push_a(t_list **dst, t_list **src)
+void	push_a(t_list **stk_a, t_list **stk_b)
 {
-	push(dst, src);
-	write(1, "pa\n", 3);
+	push(stk_a, stk_b);
+	if (write(1, "pa\n", 3) < 0)
+	{
+		free_stk(*stk_a);
+		free_stk(*stk_b);
+		exit(1);
+	}
 }
 
-void	push_b(t_list **dst, t_list **src)
+void	push_b(t_list **stk_a, t_list **stk_b)
 {
-	push(dst, src);
-	write(1, "pb\n", 3);
+	push(stk_b, stk_a);
+	if (write(1, "pb\n", 3) < 0)
+	{
+		free_stk(*stk_a);
+		free_stk(*stk_b);
+		exit(1);
+	}
 }

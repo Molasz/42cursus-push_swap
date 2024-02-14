@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 21:31:39 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/13 23:52:36 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ static void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits)
 
 void	sort_full(t_list **stk_a, t_list **stk_b, t_limits *limits)
 {
-	push_b(stk_b, stk_a);
-	push_b(stk_b, stk_a);
+	push_b(stk_a, stk_b);
+	push_b(stk_a, stk_b);
 	if ((*stk_b)->num > (*stk_b)->next->num)
 	{
 		limits->max = (*stk_b)->num;

@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 14:43:15 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/14 00:06:50 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	push_front(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 		bpos--;
 	}
 	while (apos-- > 0)
-		rotate_a(stk_a);
+		rotate_a(stk_a, stk_b);
 	while (bpos-- > 0)
-		rotate_b(stk_b);
+		rotate_b(stk_a, stk_b);
 }
 
 void	push_back(int apos, int bpos, t_list **stk_a, t_list **stk_b)
@@ -35,9 +35,9 @@ void	push_back(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 		bpos++;
 	}
 	while (apos++ < 0)
-		reverse_a(stk_a);
+		reverse_a(stk_a, stk_b);
 	while (bpos++ < 0)
-		reverse_b(stk_b);
+		reverse_b(stk_a, stk_b);
 }
 
 void	push_reverse(int apos, int bpos, t_list **stk_a, t_list **stk_b)
@@ -45,16 +45,16 @@ void	push_reverse(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 	if (apos >= 0 && bpos < 0)
 	{
 		while (apos-- > 0)
-			rotate_a(stk_a);
+			rotate_a(stk_a, stk_b);
 		while (bpos++ < 0)
-			reverse_b(stk_b);
+			reverse_b(stk_a, stk_b);
 	}
 	else if (apos < 0 && bpos >= 0)
 	{
 		while (apos++ < 0)
-			reverse_a(stk_a);
+			reverse_a(stk_a, stk_b);
 		while (bpos-- > 0)
-			rotate_b(stk_b);
+			rotate_b(stk_a, stk_b);
 	}
 }
 
@@ -79,5 +79,5 @@ void	push_num(int apos, t_list **stk_a, t_list **stk_b, t_limits *limits)
 		push_back(apos, bpos, stk_a, stk_b);
 	else
 		push_reverse(apos, bpos, stk_a, stk_b);
-	push_b(stk_b, stk_a);
+	push_b(stk_a, stk_b);
 }

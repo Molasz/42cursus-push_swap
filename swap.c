@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 23:21:47 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/06 00:00:38 by molasz           ###   ########.fr       */
+/*   Updated: 2024/02/14 00:01:21 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,36 @@ static void	swap(t_list *stk)
 	}
 }
 
-void	swap_a(t_list *stk)
+void	swap_a(t_list **stk_a, t_list **stk_b)
 {
-	swap(stk);
-	write(1, "sa\n", 3);
+	swap(*stk_a);
+	if (write(1, "sa\n", 3) < 0)
+	{
+		free_stk(*stk_a);
+		free_stk(*stk_b);
+		exit(1);
+	}
 }
 
-void	swap_b(t_list *stk)
+void	swap_b(t_list **stk_a, t_list **stk_b)
 {
-	swap(stk);
-	write(1, "sb\n", 3);
+	swap(*stk_b);
+	if (write(1, "sb\n", 3) < 0)
+	{
+		free_stk(*stk_a);
+		free_stk(*stk_b);
+		exit(1);
+	}
 }
 
-void	swap_ab(t_list *stk_a, t_list *stk_b)
+void	swap_ab(t_list **stk_a, t_list **stk_b)
 {
-	swap(stk_a);
-	swap(stk_b);
-	write(1, "ss\n", 3);
+	swap(*stk_a);
+	swap(*stk_b);
+	if (write(1, "ss\n", 3) < 0)
+	{
+		free_stk(*stk_a);
+		free_stk(*stk_b);
+		exit(1);
+	}
 }

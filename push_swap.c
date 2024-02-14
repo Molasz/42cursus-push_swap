@@ -6,33 +6,11 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 00:05:26 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/13 16:36:24 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/14 01:08:25 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static char	**get_numsstr(int argc, char **argv)
-{
-	char	**numsstr;
-	char	*str;
-	char	*tmp;
-
-	if (argc > 2)
-		return (argv + 1);
-	if (argc == 2)
-		return (ft_split(argv[1], ' '));
-	tmp = get_next_line(0);
-	if (!tmp)
-		return (NULL);
-	str = ft_strtrim(tmp, "\n");
-	free(tmp);
-	if (!str)
-		return (NULL);
-	numsstr = ft_split(str, ' ');
-	free(str);
-	return (numsstr);
-}
 
 static int	check_numsstr(char **nums)
 {
@@ -45,8 +23,10 @@ static int	check_numsstr(char **nums)
 		j = 0;
 		while (nums[i][j])
 		{
-			if ((nums[i][j] != '-' && nums[i][j] != '+')
+			if ((nums[i][j] != '+' && nums[i][j] != '-')
 				&& (nums[i][j] < '0' || nums[i][j] > '9'))
+				return (1);
+			if ((nums[i][j] == '+' || nums[i][j] == '-') && j)
 				return (1);
 			j++;
 		}
@@ -101,24 +81,19 @@ static int	check_nums(int *nums, int len)
 
 int	main(int argc, char **argv)
 {
-	char	**numsstr;
 	int		*nums;
 	int		len;
 	t_list	*stk;
 
-	numsstr = get_numsstr(argc, argv);
-	if (!numsstr || check_numsstr(numsstr))
+	if (argc < 2 || check_numsstr(argv + 1))
 		return (on_error());
 	len = 0;
-	nums = get_nums(numsstr);
-	if (argc < 3)
-		len = free_numsstr(numsstr);
-	else
-		len = argc - 1;
+	nums = get_nums(argv + 1);
+	len = argc - 1;
 	if (!nums || check_nums(nums, len))
 		return (on_error());
 	stk = get_stk(nums, len);
-	free(nums);
 	sort(stk);
+	free(nums);
 	return (0);
 }

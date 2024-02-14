@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:18:02 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 11:06:11 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/14 00:41:35 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,11 @@
 
 int	on_error(void)
 {
-	write(2, "ERROR\n", 6);
+	write(2, "Error\n", 6);
 	return (1);
 }
 
-t_list	*free_stk(t_list *stk, int len)
-{
-	t_list	*tmp;
-
-	if (!stk)
-		return (NULL);
-	while (len--)
-	{
-		tmp = stk;
-		stk = stk->next;
-		free(tmp);
-	}
-	return (NULL);
-}
-
-int	free_numsstr(char **numsstr) //DELETE
+int	free_numsstr(char **numsstr)
 {
 	int	len;
 
@@ -47,7 +32,7 @@ int	free_numsstr(char **numsstr) //DELETE
 	return (len);
 }
 
-t_list	*new_node(int *n)
+static t_list	*new_node(int *n)
 {
 	t_list	*elem;
 
@@ -72,7 +57,7 @@ t_list	*get_stk(int *nums, int len)
 	{
 		tmp = new_node(nums + len - i - 1);
 		if (!tmp)
-			return (free_stk(stk, i));
+			return (free_stk(stk));
 		if (stk)
 		{
 			tmp->next = stk;
@@ -84,4 +69,19 @@ t_list	*get_stk(int *nums, int len)
 	}
 	stk->prev->next = stk;
 	return (stk);
+}
+
+t_list	*free_stk(t_list *stk)
+{
+	t_list	*tmp;
+	int		len;
+
+	len = stksize(stk);
+	while (len--)
+	{
+		tmp = stk;
+		stk = stk->next;
+		free(tmp);
+	}
+	return (NULL);
 }

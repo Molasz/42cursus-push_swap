@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 21:48:24 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/14 00:56:07 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ static int	is_sorted(t_list	*stk)
 	return (1);
 }
 
-static	void	sort_three(t_list **stk_a, t_limits *limits)
+static	void	sort_three(t_list **stk_a, t_list **stk_b, t_limits *limits)
 {
 	if ((*stk_a)->num > (*stk_a)->next->num
 		&& (*stk_a)->num > (*stk_a)->prev->num)
-		rotate_a(stk_a);
+		rotate_a(stk_a, stk_b);
 	else if ((*stk_a)->num < (*stk_a)->next->num
 		&& (*stk_a)->next->num > (*stk_a)->prev->num)
-		reverse_a(stk_a);
+		reverse_a(stk_a, stk_b);
 	if (!is_sorted(*stk_a))
-		swap_a(*stk_a);
+		swap_a(stk_a, stk_b);
 	limits->max = (*stk_a)->prev->num;
 	limits->min = (*stk_a)->num;
 }
@@ -47,7 +47,7 @@ static void	sort_final(t_list **stk_a, t_list **stk_b, t_limits *limits)
 		if ((*stk_b)->num > limits->max || (*stk_b)->num < limits->min)
 		{
 			while ((*stk_a)->num != limits->min)
-				reverse_a(stk_a);
+				reverse_a(stk_a, stk_b);
 			if ((*stk_b)->num > limits->max)
 				limits->max = (*stk_b)->num;
 			else
@@ -58,7 +58,7 @@ static void	sort_final(t_list **stk_a, t_list **stk_b, t_limits *limits)
 			&& (*stk_a)->prev->num < (*stk_b)->num)
 			push_a(stk_a, stk_b);
 		else
-			reverse_a(stk_a);
+			reverse_a(stk_a, stk_b);
 	}
 }
 
@@ -79,15 +79,14 @@ void	order(t_list **stk_a, t_list **stk_b, t_limits *limits)
 	if (count < len / 2)
 	{
 		while (count-- > 0)
-			rotate_a(stk_a);
+			rotate_a(stk_a, stk_b);
 	}
 	else
 	{
 		count = len - count;
 		while (count-- > 0)
-			reverse_a(stk_a);
+			reverse_a(stk_a, stk_b);
 	}
-	(void)stk_b;
 }
 
 int	sort(t_list	*stk_a)
@@ -98,14 +97,15 @@ int	sort(t_list	*stk_a)
 	stk_b = NULL;
 	limits.max = INT_MIN;
 	limits.min = INT_MAX;
-	if (is_sorted(stk_a))
-		return (0);
-	if (stksize(stk_a) > 3)
-		sort_full(&stk_a, &stk_b, &limits);
-	sort_three(&stk_a, &limits);
-	sort_final(&stk_a, &stk_b, &limits);
-	order(&stk_a, &stk_b, &limits);
-	free_stk(stk_a, stksize(stk_a));
-	free_stk(stk_b, stksize(stk_b));
+	if (!is_sorted(stk_a))
+	{
+		if (stksize(stk_a) > 3)
+			sort_full(&stk_a, &stk_b, &limits);
+		sort_three(&stk_a, &stk_b, &limits);
+		sort_final(&stk_a, &stk_b, &limits);
+		order(&stk_a, &stk_b, &limits);
+	}
+	free_stk(stk_a);
+	free_stk(stk_b);
 	return (0);
 }
