@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
+/*   By: molasz-a <molasz-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 23:52:36 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:42:31 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	update_moves(t_list *stk_a, t_list *stk_b, t_limits *limits)
 		if ((apos >= 0 && bpos >= 0) || (apos < 0 && bpos < 0))
 			stk_a->moves = max_move(apos, bpos);
 		else
-			stk_a->moves = abs(apos) + abs(bpos);
+			stk_a->moves = abs_move(apos) + abs_move(bpos);
 		stk_a = stk_a->next;
 		i++;
 	}

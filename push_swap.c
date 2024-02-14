@@ -6,31 +6,47 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 00:05:26 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/14 01:08:25 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:55:46 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static int	check_str(char *str)
+{
+	int	i;
+	int	zeros;
+	int	num;
+
+	i = 0;
+	zeros = 0;
+	num = 0;
+	while (str[i])
+	{
+		if ((str[i] != '+' && str[i] != '-')
+			&& (str[i] < '0' || str[i] > '9'))
+			return (1);
+		if ((str[i] == '+' || str[i] == '-') && i)
+			return (1);
+		if (str[i] == '0')
+			zeros++;
+		if (str[i] >= '0' && str[i] <= '9')
+			num = 1;
+		i++;
+	}
+	if (i - zeros > 11 || i == 0 || !num)
+		return (1);
+	return (0);
+}
+
 static int	check_numsstr(char **nums)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (nums[i])
 	{
-		j = 0;
-		while (nums[i][j])
-		{
-			if ((nums[i][j] != '+' && nums[i][j] != '-')
-				&& (nums[i][j] < '0' || nums[i][j] > '9'))
-				return (1);
-			if ((nums[i][j] == '+' || nums[i][j] == '-') && j)
-				return (1);
-			j++;
-		}
-		if (j > 12)
+		if (check_str(nums[i]))
 			return (1);
 		i++;
 	}
