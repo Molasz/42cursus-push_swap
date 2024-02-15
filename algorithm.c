@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/15 12:32:44 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:40:08 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits)
 	}
 	len = stksize(*stk_b);
 	apos = check_position(*stk_b, limits->max, limits);
-	if (apos < (len / 2) + (len % 2))
+	if (apos <= (len / 2) + (len % 2))
 	{
 		while (apos-- > 0)
 			reverse_b(stk_a, stk_b);

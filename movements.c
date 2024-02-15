@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 00:47:55 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/15 02:06:07 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:38:10 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_position(t_list *stk, int num, t_limits *limits)
 	pos = 0;
 	while (pos < len)
 	{
-		if ((num < limits->min || num > limits->max) && stk->num == limits->max)
+		if ((num <= limits->min || num >= limits->max) && stk->num == limits->max)
 			break ;
 		if (num < stk->prev->num && num > stk->num)
 			break ;
