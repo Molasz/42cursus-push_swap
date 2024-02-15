@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 01:14:21 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 23:47:09 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 01:10:09 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,4 @@ int	max_move(int n1, int n2)
 	if (abs_move(n1) > abs_move(n2))
 		return (n1);
 	return (n2);
-}
-
-int	calc_move(int num, t_list *stk_b, t_limits *limits)
-{
-	t_list	*tmp;
-	int		size;
-	int		len;
-
-	size = 0;
-	tmp = stk_b;
-	len = stksize(stk_b);
-	while (size < len)
-	{
-		if ((num < limits->min || num > limits->max) && tmp->num == limits->max)
-			return (size);
-		if (num < tmp->prev->num && num > tmp->num)
-			return (size);
-		size++;
-		tmp = tmp->next;
-	}
-	if (size < (len / 2) + 1)
-		return (size);
-	else
-		return (size - len);
 }

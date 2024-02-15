@@ -6,13 +6,14 @@
 #    By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 19:46:01 by molasz            #+#    #+#              #
-#    Updated: 2024/02/13 01:31:21 by molasz-a         ###   ########.fr        #
+#    Updated: 2024/02/15 01:12:25 by molasz-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= push_swap.c \
 			algorithm.c \
 			algorithm_utils.c \
+			movements.c \
 			push_num.c \
 			print.c \
 			push.c \

@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/13 23:56:01 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 02:03:26 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ typedef struct s_list
 {
 	int				num;
 	int				moves;
+	int				op;
+	int				posa;
+	int				posb;
 	struct s_list	*next;
 	struct s_list	*prev;
 }				t_list;
@@ -40,10 +43,11 @@ int		sort(t_list *stk);
 void	order(t_list **stk_a, t_list **stk_b, t_limits *limits);
 
 void	sort_full(t_list **stk_a, t_list **stk_b, t_limits *limits);
-void	push_num(int num, t_list **stk_a, t_list **stk_b, t_limits *limits);
+void	push_num(int num, t_list **stk_a, t_list **stk_b);
 int		abs_move(int n);
 int		max_move(int n1, int n2);
-int		calc_move(int num, t_list *stk_b, t_limits *limits);
+
+void	calc_movements(t_list *stk_a, t_list *stk_b, t_limits *limits);
 
 void	swap_a(t_list **stk_a, t_list **stk_b);
 void	swap_b(t_list **stk_a, t_list **stk_b);

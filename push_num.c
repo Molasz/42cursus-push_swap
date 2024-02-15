@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/14 00:06:50 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 02:05:01 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,56 +28,61 @@ void	push_front(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 
 void	push_back(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 {
-	while (apos < 0 && bpos < 0)
+	int	lena;
+	int	lenb;
+
+	lena = stksize(*stk_a);
+	lenb = stksize(*stk_b);
+	while (apos < lena && bpos < lenb)
 	{
 		reverse_ab(stk_a, stk_b);
 		apos++;
 		bpos++;
 	}
-	while (apos++ < 0)
+	while (apos++ < lena)
 		reverse_a(stk_a, stk_b);
-	while (bpos++ < 0)
+	while (bpos++ < lenb)
 		reverse_b(stk_a, stk_b);
 }
 
 void	push_reverse(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 {
-	if (apos >= 0 && bpos < 0)
-	{
-		while (apos-- > 0)
-			rotate_a(stk_a, stk_b);
-		while (bpos++ < 0)
-			reverse_b(stk_a, stk_b);
-	}
-	else if (apos < 0 && bpos >= 0)
-	{
-		while (apos++ < 0)
-			reverse_a(stk_a, stk_b);
-		while (bpos-- > 0)
-			rotate_b(stk_a, stk_b);
-	}
+	int	lenb;
+
+	lenb = stksize(*stk_b);
+	while (apos-- > 0)
+		rotate_a(stk_a, stk_b);
+	while (bpos++ < lenb)
+		reverse_b(stk_a, stk_b);
 }
 
-void	push_num(int apos, t_list **stk_a, t_list **stk_b, t_limits *limits)
+void	push_back_front(int apos, int bpos, t_list **stk_a, t_list **stk_b)
+{
+	int	lena;
+
+	lena = stksize(*stk_a);
+	while (apos++ < lena)
+		reverse_a(stk_a, stk_b);
+	while (bpos-- > 0)
+		rotate_b(stk_a, stk_b);
+}
+
+void	push_num(int posA, t_list **stk_a, t_list **stk_b)
 {
 	t_list	*tmp;
-	int		bpos;
-	int		alen;
-	int		i;
+	int		count;
 
+	count = 0;
 	tmp = *stk_a;
-	i = 0;
-	while (i++ < apos)
+	while (count++ < posA)
 		tmp = tmp->next;
-	bpos = calc_move(tmp->num, *stk_b, limits);
-	alen = stksize(*stk_a);
-	if (apos > alen / 2)
-		apos -= alen;
-	if (apos >= 0 && bpos >= 0)
-		push_front(apos, bpos, stk_a, stk_b);
-	else if (apos < 0 && bpos < 0)
-		push_back(apos, bpos, stk_a, stk_b);
+	if (tmp->op == 0)
+		push_front(tmp->posa, tmp->posb, stk_a, stk_b);
+	else if (tmp->op == 1)
+		push_back(tmp->posa, tmp->posb, stk_a, stk_b);
+	else if (tmp->op == 2)
+		push_reverse(tmp->posa, tmp->posb, stk_a, stk_b);
 	else
-		push_reverse(apos, bpos, stk_a, stk_b);
+		push_back_front(tmp->posa, tmp->posb, stk_a, stk_b);
 	push_b(stk_a, stk_b);
 }
