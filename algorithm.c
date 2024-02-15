@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/15 12:40:08 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:44:12 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ static void	algorithm(t_list **stk_a, t_list **stk_b, t_limits *limits)
 	if (apos <= (len / 2) + (len % 2))
 	{
 		while (apos-- > 0)
-			reverse_b(stk_a, stk_b);
+			reverse_b(stk_a, stk_b, 1);
 	}
 	else
 	{
 		while (apos++ > len)
-			rotate_b(stk_a, stk_b);
+			rotate_b(stk_a, stk_b, 1);
 	}
 }
 
 void	sort_full(t_list **stk_a, t_list **stk_b, t_limits *limits)
 {
-	push_b(stk_a, stk_b);
-	push_b(stk_a, stk_b);
+	push_b(stk_a, stk_b, 1);
+	push_b(stk_a, stk_b, 1);
 	if ((*stk_b)->num > (*stk_b)->next->num)
 	{
 		limits->max = (*stk_b)->num;

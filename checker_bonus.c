@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
+/*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 00:05:26 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/15 18:11:50 by molasz-a         ###   ########.fr       */
+/*   Created: 2024/02/15 18:55:30 by molasz-a          #+#    #+#             */
+/*   Updated: 2024/02/15 18:55:31 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 static int	check_str(char *str)
 {
@@ -109,7 +109,7 @@ int	main(int argc, char **argv)
 	if (!nums || check_nums(nums, len))
 		return (on_error());
 	stk = get_stk(nums, len);
-	sort(stk);
+	check(stk);
 	free(nums);
 	return (0);
 }

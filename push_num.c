@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:59:12 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/15 02:05:01 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:44:52 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	push_front(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 {
 	while (apos > 0 && bpos > 0)
 	{
-		rotate_ab(stk_a, stk_b);
+		rotate_ab(stk_a, stk_b, 1);
 		apos--;
 		bpos--;
 	}
 	while (apos-- > 0)
-		rotate_a(stk_a, stk_b);
+		rotate_a(stk_a, stk_b, 1);
 	while (bpos-- > 0)
-		rotate_b(stk_a, stk_b);
+		rotate_b(stk_a, stk_b, 1);
 }
 
 void	push_back(int apos, int bpos, t_list **stk_a, t_list **stk_b)
@@ -35,14 +35,14 @@ void	push_back(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 	lenb = stksize(*stk_b);
 	while (apos < lena && bpos < lenb)
 	{
-		reverse_ab(stk_a, stk_b);
+		reverse_ab(stk_a, stk_b, 1);
 		apos++;
 		bpos++;
 	}
 	while (apos++ < lena)
-		reverse_a(stk_a, stk_b);
+		reverse_a(stk_a, stk_b, 1);
 	while (bpos++ < lenb)
-		reverse_b(stk_a, stk_b);
+		reverse_b(stk_a, stk_b, 1);
 }
 
 void	push_reverse(int apos, int bpos, t_list **stk_a, t_list **stk_b)
@@ -51,9 +51,9 @@ void	push_reverse(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 
 	lenb = stksize(*stk_b);
 	while (apos-- > 0)
-		rotate_a(stk_a, stk_b);
+		rotate_a(stk_a, stk_b, 1);
 	while (bpos++ < lenb)
-		reverse_b(stk_a, stk_b);
+		reverse_b(stk_a, stk_b, 1);
 }
 
 void	push_back_front(int apos, int bpos, t_list **stk_a, t_list **stk_b)
@@ -62,9 +62,9 @@ void	push_back_front(int apos, int bpos, t_list **stk_a, t_list **stk_b)
 
 	lena = stksize(*stk_a);
 	while (apos++ < lena)
-		reverse_a(stk_a, stk_b);
+		reverse_a(stk_a, stk_b, 1);
 	while (bpos-- > 0)
-		rotate_b(stk_a, stk_b);
+		rotate_b(stk_a, stk_b, 1);
 }
 
 void	push_num(int posA, t_list **stk_a, t_list **stk_b)
@@ -84,5 +84,5 @@ void	push_num(int posA, t_list **stk_a, t_list **stk_b)
 		push_reverse(tmp->posa, tmp->posb, stk_a, stk_b);
 	else
 		push_back_front(tmp->posa, tmp->posb, stk_a, stk_b);
-	push_b(stk_a, stk_b);
+	push_b(stk_a, stk_b, 1);
 }

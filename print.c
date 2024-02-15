@@ -6,11 +6,11 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:16:32 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/13 00:41:41 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 19:45:59 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 void	print_stks(t_list	*stk_a, t_list	*stk_b)
 {

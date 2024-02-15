@@ -6,36 +6,22 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/15 12:45:38 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:51:35 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_sorted(t_list	*stk)
-{
-	t_list	*tmp;
-
-	tmp = stk->next;
-	while (stk != tmp)
-	{
-		if (tmp->prev->num > tmp->num)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
-
 static	void	sort_three(t_list **stk_a, t_list **stk_b, t_limits *limits)
 {
 	if ((*stk_a)->num > (*stk_a)->next->num
 		&& (*stk_a)->num > (*stk_a)->prev->num)
-		rotate_a(stk_a, stk_b);
+		rotate_a(stk_a, stk_b, 1);
 	else if ((*stk_a)->num < (*stk_a)->next->num
 		&& (*stk_a)->next->num > (*stk_a)->prev->num)
-		reverse_a(stk_a, stk_b);
+		reverse_a(stk_a, stk_b, 1);
 	if (!is_sorted(*stk_a))
-		swap_a(stk_a, stk_b);
+		swap_a(stk_a, stk_b, 1);
 	limits->max = (*stk_a)->prev->num;
 	limits->min = (*stk_a)->num;
 }
@@ -47,18 +33,18 @@ static void	sort_final(t_list **stk_a, t_list **stk_b, t_limits *limits)
 		if ((*stk_b)->num > limits->max || (*stk_b)->num < limits->min)
 		{
 			while ((*stk_a)->num != limits->min)
-				reverse_a(stk_a, stk_b);
+				reverse_a(stk_a, stk_b, 1);
 			if ((*stk_b)->num > limits->max)
 				limits->max = (*stk_b)->num;
 			else
 				limits->min = (*stk_b)->num;
-			push_a(stk_a, stk_b);
+			push_a(stk_a, stk_b, 1);
 		}
 		else if ((*stk_a)->num > (*stk_b)->num
 			&& (*stk_a)->prev->num < (*stk_b)->num)
-			push_a(stk_a, stk_b);
+			push_a(stk_a, stk_b, 1);
 		else
-			reverse_a(stk_a, stk_b);
+			reverse_a(stk_a, stk_b, 1);
 	}
 }
 
@@ -79,13 +65,13 @@ void	order(t_list **stk_a, t_list **stk_b, t_limits *limits)
 	if (count < len / 2)
 	{
 		while (count-- > 0)
-			rotate_a(stk_a, stk_b);
+			rotate_a(stk_a, stk_b, 1);
 	}
 	else
 	{
 		count = len - count;
 		while (count-- > 0)
-			reverse_a(stk_a, stk_b);
+			reverse_a(stk_a, stk_b, 1);
 	}
 }
 
