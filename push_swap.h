@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/15 02:03:26 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:31:53 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		abs_move(int n);
 int		max_move(int n1, int n2);
 
 void	calc_movements(t_list *stk_a, t_list *stk_b, t_limits *limits);
+int		check_position(t_list *stk, int num, t_limits *limits);
 
 void	swap_a(t_list **stk_a, t_list **stk_b);
 void	swap_b(t_list **stk_a, t_list **stk_b);
