@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:55:13 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/16 21:46:36 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:47:08 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void	free_stks(t_list *stk_a, t_list *stk_b)
 {
 	free_stk(stk_a);
 	free_stk(stk_b);
-
 }
 
 void	check(t_list *stk_a)
