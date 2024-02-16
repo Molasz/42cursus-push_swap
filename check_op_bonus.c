@@ -6,13 +6,13 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:55:13 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/15 20:36:45 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:46:36 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 
-static void	check_op2(char *op, t_list **stk_a, t_list **stk_b)
+static void	check_opr(char *op, t_list **stk_a, t_list **stk_b)
 {
 	if (!ft_strncmp(op, "ra\n", 3))
 		rotate_a(stk_a, stk_b, 0);
@@ -48,7 +48,14 @@ static void	check_op(char *op, t_list **stk_a, t_list **stk_b)
 	else if (!ft_strncmp(op, "pb\n", 3))
 		push_b(stk_a, stk_b, 0);
 	else
-		check_op2(op, stk_a, stk_b);
+		check_opr(op, stk_a, stk_b);
+}
+
+static void	free_stks(t_list *stk_a, t_list *stk_b)
+{
+	free_stk(stk_a);
+	free_stk(stk_b);
+
 }
 
 void	check(t_list *stk_a)
@@ -76,5 +83,6 @@ void	check(t_list *stk_a)
 	if (is_sorted(stk_a) && !stk_b)
 		write(1, "OK\n", 3);
 	else
-		on_error();
+		write(1, "KO\n", 3);
+	free_stks(stk_a, stk_b);
 }
