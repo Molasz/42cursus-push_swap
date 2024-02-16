@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:18:02 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/14 00:41:35 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:43:53 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ t_list	*get_stk(int *nums, int len)
 	{
 		tmp = new_node(nums + len - i - 1);
 		if (!tmp)
-			return (free_stk(stk));
+		{
+			free_stk(stk);
+			return (NULL);
+		}
 		if (stk)
 		{
 			tmp->next = stk;
@@ -71,7 +74,7 @@ t_list	*get_stk(int *nums, int len)
 	return (stk);
 }
 
-t_list	*free_stk(t_list *stk)
+void	free_stk(t_list *stk)
 {
 	t_list	*tmp;
 	int		len;
@@ -83,5 +86,5 @@ t_list	*free_stk(t_list *stk)
 		stk = stk->next;
 		free(tmp);
 	}
-	return (NULL);
+	return ;
 }

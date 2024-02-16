@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 23:27:38 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/15 20:14:46 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:58:26 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	push(t_list **dst, t_list **src)
 
 void	push_a(t_list **stk_a, t_list **stk_b, int w)
 {
-	push(stk_a, stk_b);
+	if (*stk_b)
+		push(stk_a, stk_b);
 	if (!w)
 		return ;
 	if (write(1, "pa\n", 3) < 0)
@@ -55,7 +56,8 @@ void	push_a(t_list **stk_a, t_list **stk_b, int w)
 
 void	push_b(t_list **stk_a, t_list **stk_b, int w)
 {
-	push(stk_b, stk_a);
+	if (*stk_a)
+		push(stk_b, stk_a);
 	if (!w)
 		return ;
 	if (write(1, "pb\n", 3) < 0)

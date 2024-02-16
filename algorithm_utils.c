@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 01:14:21 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/15 18:37:50 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:44:58 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	is_sorted(t_list	*stk)
 {
 	t_list	*tmp;
 
+	if (!stk)
+		return (0);
 	tmp = stk->next;
 	while (stk != tmp)
 	{

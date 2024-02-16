@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:55:30 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/16 00:53:30 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:37:48 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,18 @@ int	main(int argc, char **argv)
 	int		len;
 	t_list	*stk;
 
-	if (argc < 2 || check_numsstr(argv + 1))
+	if (argc == 1)
+		return (0);
+	if (check_numsstr(argv + 1))
 		return (on_error());
 	len = 0;
 	nums = get_nums(argv + 1);
 	len = argc - 1;
 	if (!nums || check_nums(nums, len))
-		return (on_error());
+		return (free(nums), on_error());
 	stk = get_stk(nums, len);
+	if (!stk)
+		return (free(nums), on_error());
 	check(stk);
 	free(nums);
 	return (0);

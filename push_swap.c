@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 00:05:26 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/16 21:12:04 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:01:55 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static int	*get_nums(char **numsstr)
 	while (numsstr[i])
 		i++;
 	nums = ft_calloc(sizeof (int), i);
+	if (!nums)
+		return (NULL);
 	i = 0;
 	while (numsstr[i])
 	{
@@ -111,6 +113,8 @@ int	main(int argc, char **argv)
 	if (!nums || check_nums(nums, len))
 		return (free(nums), on_error());
 	stk = get_stk(nums, len);
+	if (!stk)
+		return (free(nums), on_error());
 	sort(stk);
 	free(nums);
 	return (0);

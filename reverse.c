@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 23:49:07 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/15 20:14:24 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:56:29 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	reverse(t_list **stk)
 {
-	*stk = (*stk)->prev;
+	if (*stk)
+		*stk = (*stk)->prev;
 }
 
 void	reverse_a(t_list **stk_a, t_list **stk_b, int w)

@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/16 00:58:49 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:39:51 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_limits
 int		on_error(void);
 int		free_numsstr(char **numsstr);
 t_list	*get_stk(int *nums, int len);
-t_list	*free_stk(t_list *stk);
+void	free_stk(t_list *stk);
 
 int		is_sorted(t_list	*stk);
 int		stksize(t_list *stk);

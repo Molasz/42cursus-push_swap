@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-a@student.42barcelona.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 23:36:13 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/15 20:13:44 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:56:13 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	rotate(t_list **stk)
 {
-	*stk = (*stk)->next;
+	if (*stk)
+		*stk = (*stk)->next;
 }
 
 void	rotate_a(t_list **stk_a, t_list **stk_b, int w)
