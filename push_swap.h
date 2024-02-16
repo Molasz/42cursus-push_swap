@@ -6,7 +6,7 @@
 /*   By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 20:04:55 by molasz            #+#    #+#             */
-/*   Updated: 2024/02/15 18:48:51 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 00:58:49 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,14 @@ int		on_error(void);
 int		free_numsstr(char **numsstr);
 t_list	*get_stk(int *nums, int len);
 t_list	*free_stk(t_list *stk);
+
+int		is_sorted(t_list	*stk);
 int		stksize(t_list *stk);
+int		max_move(int n1, int n2);
 
 int		sort(t_list *stk);
-void	order(t_list **stk_a, t_list **stk_b, t_limits *limits);
-int		is_sorted(t_list	*stk);
-
 void	sort_full(t_list **stk_a, t_list **stk_b, t_limits *limits);
 void	push_num(int num, t_list **stk_a, t_list **stk_b);
-int		abs_move(int n);
-int		max_move(int n1, int n2);
 
 void	calc_movements(t_list *stk_a, t_list *stk_b, t_limits *limits);
 int		check_position(t_list *stk, int num, t_limits *limits);

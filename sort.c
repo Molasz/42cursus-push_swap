@@ -6,7 +6,7 @@
 /*   By: molasz-a <molasz-a@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:41:05 by molasz-a          #+#    #+#             */
-/*   Updated: 2024/02/15 18:51:35 by molasz-a         ###   ########.fr       */
+/*   Updated: 2024/02/16 00:44:20 by molasz-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	sort_final(t_list **stk_a, t_list **stk_b, t_limits *limits)
 	}
 }
 
-void	order(t_list **stk_a, t_list **stk_b, t_limits *limits)
+static void	order(t_list **stk_a, t_list **stk_b, t_limits *limits)
 {
 	t_list	*tmp;
 	int		count;
