@@ -6,7 +6,7 @@
 #    By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 19:46:01 by molasz            #+#    #+#              #
-#    Updated: 2024/02/16 01:31:47 by molasz-a         ###   ########.fr        #
+#    Updated: 2024/02/16 01:52:33 by molasz-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,10 +59,8 @@ all:		${NAME}
 %.o:		%.c Makefile
 				${CC} ${CFLAGS} -c $< -MMD
 
-lib:
+${NAME}:	${OBJS}
 				make -C libft
-
-${NAME}:	lib ${OBJS}
 				${CC} ${CFLAGS} ${OBJS} ${LIB} -o ${NAME}
 
 bonus:		${BNAME}
@@ -83,4 +81,4 @@ re:			fclean all
 
 -include ${DEPS} ${BDEPS}
 
-.PHONY:		clean fclean re all bonus lib
+.PHONY:		clean fclean re all bonus
