@@ -6,7 +6,7 @@
 #    By: molasz <molasz-dev@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 19:46:01 by molasz            #+#    #+#              #
-#    Updated: 2024/02/15 19:46:33 by molasz-a         ###   ########.fr        #
+#    Updated: 2024/02/16 01:31:47 by molasz-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,6 @@ SRCS	= push_swap.c \
 			sort.c \
 			swap.c \
 			utils.c
-
-HEAD	= push_swap.h
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -39,8 +37,6 @@ BSRCS	= checker_bonus.c \
 			swap.c \
 			utils.c \
 			print.c
-
-BHEAD	= checker_bonus.h
 
 BOBJS	= ${BSRCS:.c=.o}
 
@@ -60,28 +56,31 @@ CFLAGS	= -Wall -Wextra -Werror
 
 all:		${NAME}
 
-%.o:		%.c
+%.o:		%.c Makefile
 				${CC} ${CFLAGS} -c $< -MMD
 
-${NAME}:	${OBJS} ${HEAD} Makefile
+lib:
 				make -C libft
+
+${NAME}:	lib ${OBJS}
 				${CC} ${CFLAGS} ${OBJS} ${LIB} -o ${NAME}
 
 bonus:		${BNAME}
 
-${BNAME}:	${BOBJS} ${BHEAD} Makefile
+${BNAME}:	${BOBJS}
 				make -C libft
 				${CC} ${CFLAGS} ${BOBJS} ${LIB} -o ${BNAME}
 
 clean:
-				${RM} ${OBJS} ${DEPS}
+				make clean -C libft
+				${RM} ${OBJS} ${DEPS} ${BOBJS} ${BDEPS}
 
 fclean:		clean
 				make fclean -C libft 
-				${RM} ${NAME}
+				${RM} ${NAME} ${BNAME}
 
 re:			fclean all
 
--include ${DEPS}
+-include ${DEPS} ${BDEPS}
 
-.PHONY:		clean fclean re all bonus
+.PHONY:		clean fclean re all bonus lib
